@@ -7,19 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C10748A21F4BC910076DFB3 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C10748921F4BC910076DFB3 /* AddViewController.swift */; };
+		5C10748C21F4BCA40076DFB3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C10748B21F4BCA40076DFB3 /* SettingsViewController.swift */; };
 		5CE2322121F4ABF40035F49F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE2322021F4ABF40035F49F /* AppDelegate.swift */; };
-		5CE2322321F4ABF40035F49F /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE2322221F4ABF40035F49F /* FirstViewController.swift */; };
-		5CE2322521F4ABF40035F49F /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE2322421F4ABF40035F49F /* SecondViewController.swift */; };
+		5CE2322321F4ABF40035F49F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE2322221F4ABF40035F49F /* HomeViewController.swift */; };
+		5CE2322521F4ABF40035F49F /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE2322421F4ABF40035F49F /* LibraryViewController.swift */; };
 		5CE2322821F4ABF40035F49F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CE2322621F4ABF40035F49F /* Main.storyboard */; };
 		5CE2322A21F4ABF60035F49F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CE2322921F4ABF60035F49F /* Assets.xcassets */; };
 		5CE2322D21F4ABF60035F49F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CE2322B21F4ABF60035F49F /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5C10748921F4BC910076DFB3 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		5C10748B21F4BCA40076DFB3 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5CE2321D21F4ABF40035F49F /* Comic Cast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Comic Cast.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CE2322021F4ABF40035F49F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5CE2322221F4ABF40035F49F /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		5CE2322421F4ABF40035F49F /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		5CE2322221F4ABF40035F49F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		5CE2322421F4ABF40035F49F /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		5CE2322721F4ABF40035F49F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5CE2322921F4ABF60035F49F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5CE2322C21F4ABF60035F49F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -37,6 +41,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C10748521F4B2E50076DFB3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5CE2322221F4ABF40035F49F /* HomeViewController.swift */,
+				5CE2322421F4ABF40035F49F /* LibraryViewController.swift */,
+				5C10748921F4BC910076DFB3 /* AddViewController.swift */,
+				5C10748B21F4BCA40076DFB3 /* SettingsViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5C10748621F4B30E0076DFB3 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				5CE2322921F4ABF60035F49F /* Assets.xcassets */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		5C10748721F4B3550076DFB3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5CE2322621F4ABF40035F49F /* Main.storyboard */,
+				5CE2322B21F4ABF60035F49F /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5C10748821F4B37A0076DFB3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		5CE2321421F4ABF40035F49F = {
 			isa = PBXGroup;
 			children = (
@@ -56,12 +95,11 @@
 		5CE2321F21F4ABF40035F49F /* Comic Cast */ = {
 			isa = PBXGroup;
 			children = (
+				5C10748621F4B30E0076DFB3 /* Library */,
+				5C10748821F4B37A0076DFB3 /* Model */,
+				5C10748721F4B3550076DFB3 /* View */,
+				5C10748521F4B2E50076DFB3 /* Controller */,
 				5CE2322021F4ABF40035F49F /* AppDelegate.swift */,
-				5CE2322221F4ABF40035F49F /* FirstViewController.swift */,
-				5CE2322421F4ABF40035F49F /* SecondViewController.swift */,
-				5CE2322621F4ABF40035F49F /* Main.storyboard */,
-				5CE2322921F4ABF60035F49F /* Assets.xcassets */,
-				5CE2322B21F4ABF60035F49F /* LaunchScreen.storyboard */,
 				5CE2322E21F4ABF60035F49F /* Info.plist */,
 			);
 			path = "Comic Cast";
@@ -138,9 +176,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5CE2322521F4ABF40035F49F /* SecondViewController.swift in Sources */,
+				5C10748C21F4BCA40076DFB3 /* SettingsViewController.swift in Sources */,
+				5C10748A21F4BC910076DFB3 /* AddViewController.swift in Sources */,
+				5CE2322521F4ABF40035F49F /* LibraryViewController.swift in Sources */,
 				5CE2322121F4ABF40035F49F /* AppDelegate.swift in Sources */,
-				5CE2322321F4ABF40035F49F /* FirstViewController.swift in Sources */,
+				5CE2322321F4ABF40035F49F /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

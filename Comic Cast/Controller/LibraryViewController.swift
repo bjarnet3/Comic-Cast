@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  LibraryViewController.swift
 //  Comic Cast
 //
 //  Created by Bjarne Tvedten on 20/01/2019.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class LibraryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

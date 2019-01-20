@@ -24,9 +24,9 @@
 - [ ] Good Coding Practices
 - [ ] Consistent Coding Style and Formatting
 - [ ] Namings and Naming Convetntions
-- [ ] Good use of comments / **Markdown Language** / **Pre**
-- [ ] Lint warnings & Code smells / **Debugging** / **Infix**
-- [ ] Unit & Integrations Tests / **Tests** / **Post**
+- [ ] Good use of comments / **Markdown Language** / -Pre
+- [ ] Lint warnings & Code smells / **Debugging** / -Infix
+- [ ] Unit & Integrations Tests / **Tests** / -Post
 
 ### Day 1: (Connections & Strategies)
 

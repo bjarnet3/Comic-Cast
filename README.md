@@ -1,4 +1,4 @@
-# Shortcut
+# xkcd reader
 **The Shortcutter's iOS Challenge** [->](https://github.com/shortcut/coding-assignment-ios)
 
 ### Customer Requirements

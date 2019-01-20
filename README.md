@@ -28,8 +28,11 @@
 - [ ] Lint warnings & Code smells / **Debugging** / -Infix
 - [ ] Unit & Integrations Tests / **Tests** / -Post
 
-### Day 1: (Connections & Strategies)
+### Day 1: (Strategy, Setup & Connection)
 
 ### Day 2: ( ****** )
 
 ### Day 3: ( ****** )
+
+### RESOURCES
+- https://thenounproject.com/search/?q=Home&i=1397560 (Home Icon)

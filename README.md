@@ -2,11 +2,11 @@
 **The Shortcutter's iOS Challenge** [->](https://github.com/shortcut/coding-assignment-ios)
 
 ### Customer Requirements
-- [ ] Browse through the comics
+- [x] Browse through the comics
 - [ ] See the comic details, including its description 
 - [ ] Search for comics by the comic number as well as text
 - [ ] Get the comic explanation
-- [ ] favorite the comics, which would be available offline too
+- [x] favorite the comics, which would be available offline too
 - [ ] send comics to others
 - [ ] Search for comics by the comic number as well as text
 - [ ] Get notifications when a new comic is published
@@ -18,7 +18,7 @@
 3. Not more than 8-10 Hours (mail from Ivan)
 
 ### Review & Readme
-- [ ] VCS history, with more than 1 commits
+- [x] VCS history, with more than 1 commits
 - [ ] Project Structure
 - [ ] Project Architecture
 - [ ] Good Coding Practices

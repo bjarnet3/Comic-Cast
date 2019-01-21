@@ -17,14 +17,16 @@ class LibraryViewController: UIViewController {
 
     // MARK: - Properties: Array & Varables
     // -------------------------------------
-    private var comic: Comic?
-    private var comics = [0:[Comic]()]
-    private var comicsZero = [Comic]()
-    private var comicsOne = [Comic]()
-
+    public var comics = [0:[Comic]()]
+    public var comicSelected: Comic?
+    
     private var comicView: AddComic?
     private var animator: UIViewPropertyAnimator?
     private var lastSelectedCell: UICollectionViewCell?
+    
+    @IBAction func UploadAction(_ sender: Any) {
+        self.enterAddComicView()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,27 +34,47 @@ class LibraryViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        collectionView.contentInset.top = 45
         testSetup()
     }
     
     // MARK: - Functions: Animations & Views
     // ----------------------------------------
     private func testSetup() {
-        let comic1 = Comic(comicID: 0, comicName: "xkcd", num: 1100, title: "Vows", alt: "So, um. Do you want to get a drink after the game?", img: "https://imgs.xkcd.com/comics/vows.png", logo: "https://cdn.shopify.com/s/files/1/0149/3544/products/hoodie_1_7f9223f9-6933-47c6-9af5-d06b8227774a_thumb.png")
-        let comic2 = Comic(comicID: 0, comicName: "xkcd", num: 1320, title: "Walmart", alt: "What I really want is to hang out where I hung out with my friends in college, but have all my older relatives there too.", img: "https://imgs.xkcd.com/comics/walmart.png", logo: "https://cdn.shopify.com/s/files/1/0149/3544/products/hoodie_1_7f9223f9-6933-47c6-9af5-d06b8227774a_thumb.png")
-        let comic3 = Comic(comicID: 0, comicName: "xkcd", num: 803, title: "Airfoil", alt: "This is a fun explanation to prepare your kids for; it's common and totally wrong. Good lines include 'why does the air have to travel on both sides at the same time?' and 'I saw the Wright brothers plane and those wings were curved the same on the top and bottom!'", img: "https://imgs.xkcd.com/comics/airfoil.png", logo: "https://cdn.shopify.com/s/files/1/0149/3544/products/hoodie_1_7f9223f9-6933-47c6-9af5-d06b8227774a_thumb.png")
-        let comic4 = Comic(comicID: 0, comicName: "xkcd", num: 44, title: "Love", alt: "This one makes me wince every time I think about it", img: "https://imgs.xkcd.com/comics/love.jpg", logo: "https://cdn.shopify.com/s/files/1/0149/3544/products/hoodie_1_7f9223f9-6933-47c6-9af5-d06b8227774a_thumb.png")
+        // Dilbert
+        let comic0 = Comic(comicID: 0, comicName: "Dilbert", num: 1, title: "Business Insider", alt: "That's Not How It Works.", img: "https://static.businessinsider.com/image/525e97dfeab8ead530928bff/image.jpg", logo: "https://images-na.ssl-images-amazon.com/images/I/41lCbd6yFlL.jpg")
         
-        let comic5 = Comic(comicID: 1, comicName: "xkcd", num: 44, title: "Love", alt: "This one makes me wince every time I think about it", img: "https://imgs.xkcd.com/comics/love.jpg", logo: "https://cdn.shopify.com/s/files/1/0149/3544/products/hoodie_1_7f9223f9-6933-47c6-9af5-d06b8227774a_thumb.png")
+        let comic10 = Comic(comicID: 0, comicName: "Dilbert", num: 2, title: "Pie Chart", alt: "I pledge my life and fortune to the Pie!", img: "https://static.wingify.com/vwo/uploads/sites/3/2011/05/dilbert-strip.gif", logo: "https://images-na.ssl-images-amazon.com/images/I/41lCbd6yFlL.jpg")
+        comic10.fav = true
         
-        self.comicsZero.append(comic1)
-        self.comicsZero.append(comic2)
-        self.comicsZero.append(comic3)
-        self.comicsZero.append(comic4)
-        self.comicsOne.append(comic5)
         
-        self.comics[0]?.append(contentsOf: comicsZero)
-        self.comics[1]?.append(contentsOf: comicsOne)
+        let comic1 = Comic(comicID: 1, comicName: "xkcd", num: 1100, title: "Vows", alt: "So, um. Do you want to get a drink after the game?", img: "https://imgs.xkcd.com/comics/vows.png", logo: "https://pbs.twimg.com/profile_images/2601531052/b7cct6s1npfvqmr87xyl_400x400.png")
+        comic1.fav = true
+        
+        let comic2 = Comic(comicID: 1, comicName: "xkcd", num: 1320, title: "Walmart", alt: "What I really want is to hang out where I hung out with my friends in college, but have all my older relatives there too.", img: "https://imgs.xkcd.com/comics/walmart.png", logo: "http://cdn.embed.ly/providers/logos/xkcd.png")
+        let comic3 = Comic(comicID: 1, comicName: "xkcd", num: 803, title: "Airfoil", alt: "This is a fun explanation to prepare your kids for; it's common and totally wrong. Good lines include 'why does the air have to travel on both sides at the same time?' and 'I saw the Wright brothers plane and those wings were curved the same on the top and bottom!'", img: "https://imgs.xkcd.com/comics/airfoil.png", logo: "http://cdn.embed.ly/providers/logos/xkcd.png")
+        comic3.fav = true
+        
+        let comic4 = Comic(comicID: 1, comicName: "xkcd", num: 44, title: "Love", alt: "This one makes me wince every time I think about it", img: "https://imgs.xkcd.com/comics/love.jpg", logo: "https://pbs.twimg.com/profile_images/2601531052/b7cct6s1npfvqmr87xyl_400x400.png")
+        
+        
+        // Calvin and Hobbes
+        let comic6 = Comic(comicID: 2, comicName: "Calvin and Hobbes", num: 1, title: "Born to be wild", alt: "He'd be just as funny without all the Pooh jokes", img: "https://www.blingyourband.com/media/catalog/product/cache/1/image/650x650/9df78eab33525d08d6e5fb8d27136e95/i/m/image_calvin-hobbes-baby-helmet-design_2.jpg", logo: "https://gartic.com.br/imgs/mural/iv/ivan_ferraro/calvin-e-haroldo.png")
+        comic6.fav = true
+        
+        let comic7 = Comic(comicID: 2, comicName: "Calvin and Hobbes", num: 2, title: "The dead bird", alt: "What to say about this one…sheer poetry. Did anybody say philosophy?", img: "https://calvy.files.wordpress.com/2010/08/dead-bird.jpg", logo: "https://gartic.com.br/imgs/mural/iv/ivan_ferraro/calvin-e-haroldo.png")
+        comic7.fav = true
+        
+        let comic8 = Comic(comicID: 2, comicName: "Calvin and Hobbes", num: 3, title: "Stars", alt: "...", img: "https://i0.wp.com/dogwithblog.in/wp-content/uploads/2010/08/calvin-hobbs-stars-1.jpg", logo: "https://gartic.com.br/imgs/mural/iv/ivan_ferraro/calvin-e-haroldo.png")
+        
+        
+        // Jerry Beck
+        let comic20 = Comic(comicID: 9, comicName: "Jerry Beck", num: 1, title: "Today’s Bizarro", alt: "He'd be just as funny without all the Pooh jokes", img: "https://www.cartoonbrew.com/wp-content/uploads/bizarro4811.jpg", logo: "https://www.cartoonbrew.com/wp-content/themes/cartoon-brew/images/logo.png")
+        
+        self.comics[0] = [comic0, comic10]
+        self.comics[1] = [comic1, comic2, comic3, comic4]
+        self.comics[2] = [comic6, comic7, comic8]
+        self.comics[3] = [comic20]
     }
 
     private func enterAddComicView() {
@@ -93,7 +115,7 @@ class LibraryViewController: UIViewController {
         })
         
         // Init Data to comicView
-        comicView.initData(comic: self.comic, completion: {
+        comicView.initData(comic: self.comicSelected, completion: {
             print("complete itemView")
             self.exitAddComicView()
         })
@@ -152,11 +174,13 @@ class LibraryViewController: UIViewController {
 // ---------------------------------------------
 extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.comics[section]?.count ?? 0
+        guard let com = self.comics[section]?.count else { return 0 }
+        return com
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return comics.count
+        print(comics.keys.count)
+        return comics.keys.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -171,15 +195,22 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
         return UICollectionViewCell()
     }
     
-    /*
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.lastSelectedCell = collectionView.cellForItem(at: indexPath)
-
+        
+        // Set Selected Comic
+        let comics = self.comics[indexPath.section]
+        if let comic = comics?[indexPath.row] {
+            self.comicSelected = comic
+        }
+        
+        /*
         if indexPath.row == self.comics.count {
             enterAddComicView()
         }
+        */
     }
-    */
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {

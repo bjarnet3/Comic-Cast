@@ -55,3 +55,26 @@ class FrostyCornerView: FrostyView {
     }
 }
 
+class FrostyTabBar: UITabBar {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setEffect()
+    }
+}
+
+extension FrostyTabBar {
+    func setEffect(blurEffect: UIBlurEffect.Style = .light) {
+        for view in subviews {
+            if view is UIVisualEffectView {
+                view.removeFromSuperview()
+            }
+        }
+        let frost = UIVisualEffectView(effect: UIBlurEffect(style: blurEffect))
+        frost.frame = bounds
+        frost.autoresizingMask = .flexibleWidth
+        
+        insertSubview(frost, at: 0)
+    }
+}
+
+

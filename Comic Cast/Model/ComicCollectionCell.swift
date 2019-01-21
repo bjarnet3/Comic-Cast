@@ -13,15 +13,35 @@ class ComicCollectionCell: UICollectionViewCell {
     @IBOutlet weak var comicImageView: UIImageView!
     @IBOutlet weak var comicTitleLbl: UILabel!
     @IBOutlet weak var comicAltLbl: UILabel!
+    @IBOutlet weak var comicFav: UIButton!
     
-    var selectMultipleItems = false
+    public var comic: Comic?
+    public var selectMultipleItems = false
+    
+    public var favorite = false {
+        didSet {
+            self.comic?.fav = favorite
+            
+            let color = favorite == true ? UIColor.red : UIColor.lightGray
+            self.comicFav.alpha = favorite == true ? 0.9 : 0.7
+            self.comicFav.titleLabel?.textColor = color
+            self.comicFav.setTitleColor(color, for: .normal)
+            
+            self.layoutIfNeeded()
+            print("layutIfNeeded")
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         self.layer.cornerRadius = 19.5
-        self.layer.borderWidth = 1.1
-        self.layer.borderColor = UIColor.white.cgColor
+        self.layer.borderWidth = 0.95
+        self.layer.borderColor = UIColor.lightGray.cgColor
+    }
+    
+    @IBAction func setFavorite(_ sender: Any) {
+        self.favorite = !favorite
     }
     
     override var isSelected: Bool {
@@ -60,7 +80,6 @@ class ComicCollectionCell: UICollectionViewCell {
     }
     
     public func loadCell(comic: Comic) {
-        
         if let urlString = comic.img {
             if !comic.local {
                 self.comicImageView.loadImageUsingCacheWith(urlString: urlString)
@@ -68,7 +87,10 @@ class ComicCollectionCell: UICollectionViewCell {
                 self.comicImageView.image = UIImage(named: urlString)
             }
         }
-        self.comicTitleLbl.text = comic.title ?? "No Title"
-        self.comicAltLbl.text = comic.alt ?? "No Alt Message"
+        self.comicTitleLbl.text = comic.title ?? "No Comic Title"
+        self.comicAltLbl.text = comic.alt ?? "No Alt Text"
+        
+        self.favorite = comic.fav
+        self.comic = comic
     }
 }

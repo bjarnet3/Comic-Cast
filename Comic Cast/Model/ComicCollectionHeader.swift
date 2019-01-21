@@ -16,6 +16,10 @@ class ComicCollectionHeader: UICollectionReusableView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        self.comicLogoImage.layer.cornerRadius = 10.0
+        self.comicLogoImage.layer.borderWidth = 0.5
+        self.comicLogoImage.layer.borderColor = UIColor.lightGray.cgColor
     }
     
     public func loadSectionHeader(comic: Comic) {

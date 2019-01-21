@@ -8,6 +8,8 @@
 
 import Foundation
 
+// Comic is the Primary Object
+// ---------------------------
 class Comic {
     var comicID: Int
     var comicName: String?
@@ -24,6 +26,8 @@ class Comic {
     var alt: String?
     
     var local: Bool = false
+    var fav: Bool = false
+    
     var img: String?
     var logo: String?
     

@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		5C10748A21F4BC910076DFB3 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C10748921F4BC910076DFB3 /* AddViewController.swift */; };
 		5C10748C21F4BCA40076DFB3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C10748B21F4BCA40076DFB3 /* SettingsViewController.swift */; };
+		5C53D91E21F5A38400AC3529 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CE2322621F4ABF40035F49F /* Main.storyboard */; };
+		5C53D92021F5A3ED00AC3529 /* CustomView+Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C53D91F21F5A3ED00AC3529 /* CustomView+Button.swift */; };
+		5C53D92221F5A42E00AC3529 /* CALayer+addShaddow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C53D92121F5A42E00AC3529 /* CALayer+addShaddow.swift */; };
 		5C62481421F525C8006E739B /* AddComic.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CAF19ED21F50D6C008C0845 /* AddComic.xib */; };
 		5CAF19DC21F4F618008C0845 /* Comic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAF19DB21F4F618008C0845 /* Comic.swift */; };
 		5CAF19DF21F4F8B1008C0845 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAF19DE21F4F8B1008C0845 /* Extensions.swift */; };
@@ -19,12 +22,11 @@
 		5CAF19EA21F5048A008C0845 /* PrintDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAF19E921F5048A008C0845 /* PrintDebug.swift */; };
 		5CAF19EC21F50621008C0845 /* AddCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAF19EB21F50621008C0845 /* AddCollectionCell.swift */; };
 		5CAF19EF21F50E0B008C0845 /* AddComic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAF19EE21F50E0B008C0845 /* AddComic.swift */; };
-		5CAF19F121F50F6F008C0845 /* FrostyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAF19F021F50F6F008C0845 /* FrostyView.swift */; };
+		5CAF19F121F50F6F008C0845 /* FrostyView+Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAF19F021F50F6F008C0845 /* FrostyView+Tabbar.swift */; };
 		5CDFD95F21F552CD00B032E0 /* ComicCollectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDFD95E21F552CD00B032E0 /* ComicCollectionHeader.swift */; };
 		5CE2322121F4ABF40035F49F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE2322021F4ABF40035F49F /* AppDelegate.swift */; };
 		5CE2322321F4ABF40035F49F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE2322221F4ABF40035F49F /* HomeViewController.swift */; };
 		5CE2322521F4ABF40035F49F /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE2322421F4ABF40035F49F /* LibraryViewController.swift */; };
-		5CE2322821F4ABF40035F49F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CE2322621F4ABF40035F49F /* Main.storyboard */; };
 		5CE2322A21F4ABF60035F49F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CE2322921F4ABF60035F49F /* Assets.xcassets */; };
 		5CE2322D21F4ABF60035F49F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CE2322B21F4ABF60035F49F /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -32,6 +34,8 @@
 /* Begin PBXFileReference section */
 		5C10748921F4BC910076DFB3 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		5C10748B21F4BCA40076DFB3 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		5C53D91F21F5A3ED00AC3529 /* CustomView+Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomView+Button.swift"; sourceTree = "<group>"; };
+		5C53D92121F5A42E00AC3529 /* CALayer+addShaddow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+addShaddow.swift"; sourceTree = "<group>"; };
 		5CAF19DB21F4F618008C0845 /* Comic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comic.swift; sourceTree = "<group>"; };
 		5CAF19DE21F4F8B1008C0845 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		5CAF19E121F4F947008C0845 /* LocalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalService.swift; sourceTree = "<group>"; };
@@ -42,7 +46,7 @@
 		5CAF19EB21F50621008C0845 /* AddCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionCell.swift; sourceTree = "<group>"; };
 		5CAF19ED21F50D6C008C0845 /* AddComic.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddComic.xib; sourceTree = "<group>"; };
 		5CAF19EE21F50E0B008C0845 /* AddComic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddComic.swift; sourceTree = "<group>"; };
-		5CAF19F021F50F6F008C0845 /* FrostyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostyView.swift; sourceTree = "<group>"; };
+		5CAF19F021F50F6F008C0845 /* FrostyView+Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FrostyView+Tabbar.swift"; sourceTree = "<group>"; };
 		5CDFD95E21F552CD00B032E0 /* ComicCollectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicCollectionHeader.swift; sourceTree = "<group>"; };
 		5CE2321D21F4ABF40035F49F /* Comic Cast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Comic Cast.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CE2322021F4ABF40035F49F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -99,7 +103,9 @@
 			isa = PBXGroup;
 			children = (
 				5CAF19DB21F4F618008C0845 /* Comic.swift */,
-				5CAF19F021F50F6F008C0845 /* FrostyView.swift */,
+				5C53D91F21F5A3ED00AC3529 /* CustomView+Button.swift */,
+				5CAF19F021F50F6F008C0845 /* FrostyView+Tabbar.swift */,
+				5C53D92121F5A42E00AC3529 /* CALayer+addShaddow.swift */,
 				5CAF19EB21F50621008C0845 /* AddCollectionCell.swift */,
 				5CAF19E321F5013F008C0845 /* ComicCollectionCell.swift */,
 				5CDFD95E21F552CD00B032E0 /* ComicCollectionHeader.swift */,
@@ -218,7 +224,7 @@
 				5CE2322D21F4ABF60035F49F /* LaunchScreen.storyboard in Resources */,
 				5C62481421F525C8006E739B /* AddComic.xib in Resources */,
 				5CE2322A21F4ABF60035F49F /* Assets.xcassets in Resources */,
-				5CE2322821F4ABF40035F49F /* Main.storyboard in Resources */,
+				5C53D91E21F5A38400AC3529 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,12 +244,14 @@
 				5CDFD95F21F552CD00B032E0 /* ComicCollectionHeader.swift in Sources */,
 				5C10748A21F4BC910076DFB3 /* AddViewController.swift in Sources */,
 				5CAF19E821F50454008C0845 /* Constants.swift in Sources */,
-				5CAF19F121F50F6F008C0845 /* FrostyView.swift in Sources */,
+				5CAF19F121F50F6F008C0845 /* FrostyView+Tabbar.swift in Sources */,
+				5C53D92221F5A42E00AC3529 /* CALayer+addShaddow.swift in Sources */,
 				5CE2322521F4ABF40035F49F /* LibraryViewController.swift in Sources */,
 				5CAF19EF21F50E0B008C0845 /* AddComic.swift in Sources */,
 				5CE2322121F4ABF40035F49F /* AppDelegate.swift in Sources */,
 				5CE2322321F4ABF40035F49F /* HomeViewController.swift in Sources */,
 				5CAF19DF21F4F8B1008C0845 /* Extensions.swift in Sources */,
+				5C53D92021F5A3ED00AC3529 /* CustomView+Button.swift in Sources */,
 				5CAF19EC21F50621008C0845 /* AddCollectionCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

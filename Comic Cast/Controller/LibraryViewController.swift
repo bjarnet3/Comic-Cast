@@ -10,19 +10,33 @@ import UIKit
 
 class LibraryViewController: UIViewController {
     
+    // MARK: - IBOutlet: Connection to View "storyboard"
+    // -------------------------------------------------
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var progressView: UIProgressView!
 
     // MARK: - Properties: Array & Varables
     // -------------------------------------
     private var comic: Comic?
-    private var comics = [Comic]()
-    private var comicsSection = [0:3,1:1]
+    private var comics = [0:[Comic]()]
+    private var comicsZero = [Comic]()
+    private var comicsOne = [Comic]()
 
     private var comicView: AddComic?
     private var animator: UIViewPropertyAnimator?
     private var lastSelectedCell: UICollectionViewCell?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        testSetup()
+    }
     
+    // MARK: - Functions: Animations & Views
+    // ----------------------------------------
     private func testSetup() {
         let comic1 = Comic(comicID: 0, comicName: "xkcd", num: 1100, title: "Vows", alt: "So, um. Do you want to get a drink after the game?", img: "https://imgs.xkcd.com/comics/vows.png", logo: "https://cdn.shopify.com/s/files/1/0149/3544/products/hoodie_1_7f9223f9-6933-47c6-9af5-d06b8227774a_thumb.png")
         let comic2 = Comic(comicID: 0, comicName: "xkcd", num: 1320, title: "Walmart", alt: "What I really want is to hang out where I hung out with my friends in college, but have all my older relatives there too.", img: "https://imgs.xkcd.com/comics/walmart.png", logo: "https://cdn.shopify.com/s/files/1/0149/3544/products/hoodie_1_7f9223f9-6933-47c6-9af5-d06b8227774a_thumb.png")
@@ -31,40 +45,14 @@ class LibraryViewController: UIViewController {
         
         let comic5 = Comic(comicID: 1, comicName: "xkcd", num: 44, title: "Love", alt: "This one makes me wince every time I think about it", img: "https://imgs.xkcd.com/comics/love.jpg", logo: "https://cdn.shopify.com/s/files/1/0149/3544/products/hoodie_1_7f9223f9-6933-47c6-9af5-d06b8227774a_thumb.png")
         
-        self.comics.append(comic1)
-        self.comics.append(comic2)
-        self.comics.append(comic3)
-        self.comics.append(comic4)
-        self.comics.append(comic5)
-
-    }
-    
-    /*
-    func countSections() {
-        for com in self.comics {
-            if let countKey = self.comicsSection.filter({ $0.key == com.comicID }) {
-                let count = countKey.count
-                self.comicsSection = [com.comicID:count]
-                print(comicsSection)
-            } else {
-                self.comicsSection = [com.comicID:1]
-                print(comicsSection)
-            }
-            
-        }
-    }
-    */
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+        self.comicsZero.append(comic1)
+        self.comicsZero.append(comic2)
+        self.comicsZero.append(comic3)
+        self.comicsZero.append(comic4)
+        self.comicsOne.append(comic5)
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(ComicCollectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "ComicCollectionHeader")
-        
-        testSetup()
-        // countSections()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.comics[0]?.append(contentsOf: comicsZero)
+        self.comics[1]?.append(contentsOf: comicsOne)
     }
 
     private func enterAddComicView() {
@@ -160,26 +148,23 @@ class LibraryViewController: UIViewController {
 
 }
 
+// MARK: - UICollectionViewDelegate & Datasource
+// ---------------------------------------------
 extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let cellsInSection = self.comicsSection[section]
-        // let lastSection = self.comicsSection?.count == section
-        // let cells = lastSection ? comics.count + 1 : comics.count
-        return cellsInSection ?? 0
+        return self.comics[section]?.count ?? 0
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return comicsSection.count
+        return comics.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let comicCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ComicCollectionCell", for: indexPath) as?
-            ComicCollectionCell else { return ComicCollectionCell() }
+            ComicCollectionCell else { return UICollectionViewCell() }
         
-        let comicsForSection = self.comicsSection[indexPath.section]
-        
-        if indexPath.row < comicsForSection {
-            let comic = self.comics[indexPath.row]
+        if let comicSection = self.comics[indexPath.section] {
+            let comic = comicSection[indexPath.row]
             comicCell.loadCell(comic: comic)
             return comicCell
         }
@@ -198,9 +183,14 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
+            
             if let cellHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "ComicCollectionHeader", for: indexPath) as? ComicCollectionHeader {
-                cellHeader.loadSectionHeader(comic: self.comics[indexPath.row])
-                return cellHeader
+                
+                if let comicSection = self.comics[indexPath.section] {
+                    let comic = comicSection[indexPath.row]
+                    cellHeader.loadSectionHeader(comic: comic)
+                    return cellHeader
+                }
             }
         }
         return UICollectionReusableView()

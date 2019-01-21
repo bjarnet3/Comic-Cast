@@ -9,6 +9,9 @@
 import Foundation
 
 class Comic {
+    var comicID: Int
+    var comicName: String?
+    
     var num: Int?
     var title: String?
     
@@ -22,12 +25,16 @@ class Comic {
     
     var local: Bool = false
     var img: String?
+    var logo: String?
     
-    init(num: Int?, title: String?, alt: String?, img: String?) {
+    init(comicID: Int, comicName: String?, num: Int?, title: String?, alt: String?, img: String?, logo: String?) {
+        self.comicID = comicID
+        self.comicName = comicName
         self.num = num
         self.title = title
         self.alt = alt
         self.img = img
+        self.logo = logo
     }
     
 }

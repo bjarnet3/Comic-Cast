@@ -25,7 +25,6 @@ let GRAY_SOLID = UIColor.gray
 let WHITE_SOLID = hexStringToUIColor("#FFFFFF")
 let WHITE_ALPHA = hexStringToUIColor("#FFFFFF", 0.3)
 
-// Nanny Colors
 let PINK_SOLID = hexStringToUIColor("#cc00cc")
 let PINK_DARK_SOLID = hexStringToUIColor("#660033")
 let PINK_DARK_SHARP = hexStringToUIColor("#FF3191") // FF3191

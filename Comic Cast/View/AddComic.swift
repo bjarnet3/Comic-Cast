@@ -30,20 +30,12 @@ class AddComic: UIView {
     private var completion: Completion?
     public var pickerImage: Completion?
     
-    /*
-     // Only override draw() if you perform custom drawing.
-     // An empty implementation adversely affects performance during animation.
-     override func draw(_ rect: CGRect) {
-     // Drawing code
-     }
-     */
-    
     // MARK: - IBAction: Methods connected to UI
     // ----------------------------------------
     
     // Send Simple Message
     @IBAction private func uploadAction(_ sender: Any) {
-        // self.uploadRequest()
+        self.uploadRequest()
     }
     
     @IBAction private func cancelAction(_ sender: Any) {
@@ -60,14 +52,16 @@ class AddComic: UIView {
     
     // MARK: - Functions, Database & Animation
     // ---------------------------------------
-    /*
     public func uploadRequest(completion: Completion? = nil) {
         setProgress(progress: 1.0, animated: true, alpha: 1.0, delay: 0.05, duration: 4.2, completion: nil)
-        if let image = self.itemImageView.image {
-            let item = Item(itemID: "", projectID: "", imageName: nil, itemTitle: itemTitleTextField.text ?? "", itemPrice: itemPriceTextField.text ?? "", itemNew: self.itemNewSwitch.isOn, itemSale: self.itemSaleSwitch.isOn, itemLocal: false)
+        if let image = self.comicImageView.image {
+            let comic = Comic(comicID: 0, comicName: "", num: 99, title: comicTitleTextField.text ?? "", alt: comicAltTextField.text ?? "", img: "", logo: "")
+            self.completion!()
+            /*
             DataService.instance.post(image: image, to: item, completion: {
                 self.completion?()
             })
+            */
             setProgress(progress: 0.0, animated: true, alpha: 0.0, delay: 0.0, duration: 5.2, completion: {
                 completion?()
             })
@@ -78,12 +72,11 @@ class AddComic: UIView {
             })
         }
     }
-    */
     
     private func cancelRequest() {
         self.comicImageAddButton.alpha = 1.0
         self.comicImageAddButton.isUserInteractionEnabled = true
-        self.comicUploadButton.setTitle("Load Image", for: .normal)
+        self.comicUploadButton.setTitle("Upload Comic", for: .normal)
         self.completion?()
     }
     

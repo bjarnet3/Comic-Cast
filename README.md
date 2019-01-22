@@ -28,11 +28,20 @@
 - [ ] Lint warnings & Code smells / **Debugging** / -Infix
 - [ ] Unit & Integrations Tests / **Tests** / -Post
 
-### Day 1: (Strategy, Setup & Connection)
-
-### Day 2: ( ****** )
-
-### Day 3: ( ****** )
+### Day 1: ( Strategy, Setup & Connection ) ( 3 - 4 Hours )
+- [x] Brainstorming & Drawing [ with Mindnode ]
+- [x] Static Setup of Objects / Table / CollectionView
+- [x] Some icons and images
+- [x] Import Subclasses / Functions / Abilities ( **Reusable** )
+- [ ] Setup Database / Firebase
+### Day 2: ( Structure & Architecture ) ( 2 - 3 Hours )
+- [ ] Database and Structure
+- [ ] Architecture & Connect
+- [ ] Fix & Test
+### Day 3: ( Connect the dots, fix & Complete ) ( 2 - 3 Hours )
+- [ ] Connect the do
+- [ ] Debug, Cleanup $ Testing
+- [ ] Fix, Reagain & Repeat
 
 ### RESOURCES
 - https://thenounproject.com/search/?q=Home&i=1397560 (Home Icon)

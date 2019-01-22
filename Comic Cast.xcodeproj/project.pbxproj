@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52FC0C3382D3A1FEAD5AA6FF /* Pods_Comic_Cast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B5DB6D21228F1CDF949E37 /* Pods_Comic_Cast.framework */; };
 		5C10748A21F4BC910076DFB3 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C10748921F4BC910076DFB3 /* AddViewController.swift */; };
 		5C10748C21F4BCA40076DFB3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C10748B21F4BCA40076DFB3 /* SettingsViewController.swift */; };
 		5C53D91E21F5A38400AC3529 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CE2322621F4ABF40035F49F /* Main.storyboard */; };
 		5C53D92021F5A3ED00AC3529 /* CustomView+Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C53D91F21F5A3ED00AC3529 /* CustomView+Button.swift */; };
 		5C53D92221F5A42E00AC3529 /* CALayer+addShaddow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C53D92121F5A42E00AC3529 /* CALayer+addShaddow.swift */; };
 		5C62481421F525C8006E739B /* AddComic.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CAF19ED21F50D6C008C0845 /* AddComic.xib */; };
+		5C794E0D21F5DCB700105085 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C794E0C21F5DCB700105085 /* SettingsTableViewCell.swift */; };
+		5C920CC621F7A57100A1AC1A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C920CC521F7A57000A1AC1A /* GoogleService-Info.plist */; };
 		5CAF19DC21F4F618008C0845 /* Comic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAF19DB21F4F618008C0845 /* Comic.swift */; };
 		5CAF19DF21F4F8B1008C0845 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAF19DE21F4F8B1008C0845 /* Extensions.swift */; };
 		5CAF19E221F4F947008C0845 /* LocalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAF19E121F4F947008C0845 /* LocalService.swift */; };
@@ -32,10 +35,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		20EE01CE34A5E07E107F2616 /* Pods-Comic Cast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Comic Cast.release.xcconfig"; path = "Pods/Target Support Files/Pods-Comic Cast/Pods-Comic Cast.release.xcconfig"; sourceTree = "<group>"; };
 		5C10748921F4BC910076DFB3 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		5C10748B21F4BCA40076DFB3 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5C53D91F21F5A3ED00AC3529 /* CustomView+Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomView+Button.swift"; sourceTree = "<group>"; };
 		5C53D92121F5A42E00AC3529 /* CALayer+addShaddow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+addShaddow.swift"; sourceTree = "<group>"; };
+		5C794E0C21F5DCB700105085 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		5C920CC521F7A57000A1AC1A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5CAF19DB21F4F618008C0845 /* Comic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comic.swift; sourceTree = "<group>"; };
 		5CAF19DE21F4F8B1008C0845 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		5CAF19E121F4F947008C0845 /* LocalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalService.swift; sourceTree = "<group>"; };
@@ -56,6 +62,8 @@
 		5CE2322921F4ABF60035F49F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5CE2322C21F4ABF60035F49F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5CE2322E21F4ABF60035F49F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		64B5DB6D21228F1CDF949E37 /* Pods_Comic_Cast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Comic_Cast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC6D81D45BF39DF338B0DF30 /* Pods-Comic Cast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Comic Cast.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Comic Cast/Pods-Comic Cast.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52FC0C3382D3A1FEAD5AA6FF /* Pods_Comic_Cast.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +118,7 @@
 				5CAF19EB21F50621008C0845 /* AddCollectionCell.swift */,
 				5CAF19E321F5013F008C0845 /* ComicCollectionCell.swift */,
 				5CDFD95E21F552CD00B032E0 /* ComicCollectionHeader.swift */,
+				5C794E0C21F5DCB700105085 /* SettingsTableViewCell.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -137,6 +147,8 @@
 			children = (
 				5CE2321F21F4ABF40035F49F /* Comic Cast */,
 				5CE2321E21F4ABF40035F49F /* Products */,
+				D5C1271539EFC353C000777C /* Pods */,
+				5EB544C4AA7F3C68F26ABF4A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -158,9 +170,27 @@
 				5C10748721F4B3550076DFB3 /* View */,
 				5C10748521F4B2E50076DFB3 /* Controller */,
 				5CE2322021F4ABF40035F49F /* AppDelegate.swift */,
+				5C920CC521F7A57000A1AC1A /* GoogleService-Info.plist */,
 				5CE2322E21F4ABF60035F49F /* Info.plist */,
 			);
 			path = "Comic Cast";
+			sourceTree = "<group>";
+		};
+		5EB544C4AA7F3C68F26ABF4A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				64B5DB6D21228F1CDF949E37 /* Pods_Comic_Cast.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D5C1271539EFC353C000777C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CC6D81D45BF39DF338B0DF30 /* Pods-Comic Cast.debug.xcconfig */,
+				20EE01CE34A5E07E107F2616 /* Pods-Comic Cast.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,9 +200,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5CE2323121F4ABF60035F49F /* Build configuration list for PBXNativeTarget "Comic Cast" */;
 			buildPhases = (
+				344BDE4AD587813B13C28922 /* [CP] Check Pods Manifest.lock */,
 				5CE2321921F4ABF40035F49F /* Sources */,
 				5CE2321A21F4ABF40035F49F /* Frameworks */,
 				5CE2321B21F4ABF40035F49F /* Resources */,
+				88512EA59413F947812BC90D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -223,12 +255,54 @@
 			files = (
 				5CE2322D21F4ABF60035F49F /* LaunchScreen.storyboard in Resources */,
 				5C62481421F525C8006E739B /* AddComic.xib in Resources */,
+				5C920CC621F7A57100A1AC1A /* GoogleService-Info.plist in Resources */,
 				5CE2322A21F4ABF60035F49F /* Assets.xcassets in Resources */,
 				5C53D91E21F5A38400AC3529 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		344BDE4AD587813B13C28922 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Comic Cast-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		88512EA59413F947812BC90D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Comic Cast/Pods-Comic Cast-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Comic Cast/Pods-Comic Cast-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5CE2321921F4ABF40035F49F /* Sources */ = {
@@ -240,6 +314,7 @@
 				5CAF19E221F4F947008C0845 /* LocalService.swift in Sources */,
 				5CAF19EA21F5048A008C0845 /* PrintDebug.swift in Sources */,
 				5CAF19E621F50382008C0845 /* Functions.swift in Sources */,
+				5C794E0D21F5DCB700105085 /* SettingsTableViewCell.swift in Sources */,
 				5CAF19DC21F4F618008C0845 /* Comic.swift in Sources */,
 				5CDFD95F21F552CD00B032E0 /* ComicCollectionHeader.swift in Sources */,
 				5C10748A21F4BC910076DFB3 /* AddViewController.swift in Sources */,
@@ -396,15 +471,13 @@
 		};
 		5CE2323221F4ABF60035F49F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CC6D81D45BF39DF338B0DF30 /* Pods-Comic Cast.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GCRJ652248;
 				INFOPLIST_FILE = "Comic Cast/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "no.digitalmood.Comic-Cast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -414,15 +487,13 @@
 		};
 		5CE2323321F4ABF60035F49F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20EE01CE34A5E07E107F2616 /* Pods-Comic Cast.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GCRJ652248;
 				INFOPLIST_FILE = "Comic Cast/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "no.digitalmood.Comic-Cast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

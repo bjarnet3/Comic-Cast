@@ -10,9 +10,11 @@ import UIKit
 
 class ComicCollectionHeader: UICollectionReusableView {
     
+    // Comic Brand / Logo, Name and Description
+    // ----------------------------------------
     @IBOutlet weak var comicLogoImage: UIImageView!
     @IBOutlet weak var comicNameLbl: UILabel!
-    @IBOutlet weak var comicUrlLbl: UILabel!
+    @IBOutlet weak var comicDescLbl: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,7 +33,7 @@ class ComicCollectionHeader: UICollectionReusableView {
             }
         }
         self.comicNameLbl.text = comic.comicName ?? "No Title"
-        self.comicUrlLbl.text = comic.img ?? "No Alt Message"
+        self.comicDescLbl.text = comic.img ?? "No Alt Message"
     }
     
 }

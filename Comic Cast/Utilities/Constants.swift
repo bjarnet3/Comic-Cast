@@ -1,5 +1,5 @@
 //
-//  Functions.swift
+//  Constants.swift
 //  Comic Cast
 //
 //  Created by Bjarne Tvedten on 20/01/2019.

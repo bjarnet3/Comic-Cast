@@ -9,12 +9,60 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    var settings = [Settings]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        self.settings = LocalService.instance.getSettings()
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.contentInset.top = 45
     }
-
-
 }
 
+extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 65.0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        hapticButton(.selection, lowPowerModeDisabled)
+        tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.row != 0 {
+            if indexPath.row == 1 {
+                // self.goToRegister(pageToLoadFirst: 1)
+            } else if indexPath.row == 2 {
+                // self.sendRequestAlert()
+            } else if indexPath.row == 3 {
+                print("instillinger")
+                // self.goToSubSettings()
+            } else if indexPath.row == 4 {
+                // self.standardAlert()
+            } else if indexPath.row == 5 {
+                // self.logoutAlertActionSheet()
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let settings = LocalService.instance.getSettings()
+        return settings.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell") as? SettingsTableViewCell {
+            let settings = LocalService.instance.getSettings()
+            let settingsRow = indexPath.row
+            
+            cell.setupView(settings: settings[settingsRow])
+            return cell
+        }
+        return UITableViewCell()
+    }
+    
+}

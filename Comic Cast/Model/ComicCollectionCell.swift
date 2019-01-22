@@ -35,8 +35,8 @@ class ComicCollectionCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.layer.cornerRadius = 19.5
-        self.layer.borderWidth = 0.95
+        self.layer.cornerRadius = 18.0
+        self.layer.borderWidth = 0.60
         self.layer.borderColor = UIColor.lightGray.cgColor
     }
     

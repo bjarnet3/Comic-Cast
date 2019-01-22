@@ -14,6 +14,7 @@ class Comic {
     var comicID: Int
     var comicName: String?
     
+    var id: String?
     var num: Int?
     var title: String?
     

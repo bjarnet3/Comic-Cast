@@ -13,6 +13,7 @@ class LibraryViewController: UIViewController {
     // MARK: - IBOutlet: Connection to View "storyboard"
     // -------------------------------------------------
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var confirmationView: UIView!
     @IBOutlet weak var progressView: UIProgressView!
 
     // MARK: - Properties: Array & Varables
@@ -24,12 +25,17 @@ class LibraryViewController: UIViewController {
     private var animator: UIViewPropertyAnimator?
     private var lastSelectedCell: UICollectionViewCell?
     
+    private var confirmationShowing = true
+    
     @IBAction func UploadAction(_ sender: Any) {
         self.enterAddComicView()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        exitAddComicView()
+        exitConfirmation()
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -197,8 +203,9 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.lastSelectedCell = collectionView.cellForItem(at: indexPath)
+        collectionView.deselectItem(at: indexPath, animated: true)
         
+        self.lastSelectedCell = collectionView.cellForItem(at: indexPath)
         // Set Selected Comic
         let comics = self.comics[indexPath.section]
         if let comic = comics?[indexPath.row] {
@@ -249,6 +256,31 @@ extension LibraryViewController: UINavigationControllerDelegate, UIImagePickerCo
             }
         }
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension LibraryViewController {
+    func enterConfirmation() {
+        if !confirmationShowing {
+            UIView.animate(withDuration: 0.56, delay: 0.00, usingSpringWithDamping: 0.68, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
+                self.confirmationView.alpha = 1.0
+                self.confirmationView.isUserInteractionEnabled = true
+                self.confirmationView.transform = CGAffineTransform(translationX: 0, y: -15.0)
+                self.confirmationShowing = true
+            })
+        }
+        
+    }
+    
+    func exitConfirmation() {
+        if confirmationShowing {
+            UIView.animate(withDuration: 0.55, delay: 0.02, usingSpringWithDamping: 0.67, initialSpringVelocity: 0.31, options: .curveEaseOut, animations: {
+                self.confirmationView.alpha = 0.0
+                self.confirmationView.isUserInteractionEnabled = false
+                self.confirmationView.transform = CGAffineTransform(translationX: 0, y: 15.0)
+                self.confirmationShowing = false
+            })
+        }
     }
 }
 

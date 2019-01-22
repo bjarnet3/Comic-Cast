@@ -8,9 +8,11 @@
 
 import UIKit
 
+// ImageView load image function
+// -----------------------------
 extension UIImageView {
     /**
-     Load Image from Catch or Get from URL function
+     Load Image from Catch and / or Get from URL function
      
      [Tutorial on YouTube]:
      https://www.youtube.com/watch?v=GX4mcOOUrWQ "Click to Go"

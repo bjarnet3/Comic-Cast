@@ -1,5 +1,5 @@
 //
-//  Extensions.swift
+//  PrintDebug.swift
 //  Comic Cast
 //
 //  Created by Bjarne Tvedten on 20/01/2019.
@@ -8,6 +8,8 @@
 
 import Foundation
 
+// For debugging purposes
+// ----------------------
 fileprivate var disablePrint = false
 fileprivate var printCount = [String:Int]()
 fileprivate var printCountTotal = 0

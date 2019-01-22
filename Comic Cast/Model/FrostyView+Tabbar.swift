@@ -8,6 +8,8 @@
 
 import UIKit
 
+// FrostyView is a UIView SubClass
+// -------------------------------
 class FrostyView: UIView {
     
     override init(frame: CGRect) {
@@ -17,11 +19,14 @@ class FrostyView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
     override func layoutSubviews() {
         setEffect()
     }
 }
 
+// Frost effect on FrostView
+// -------------------------
 extension FrostyView {
     func setEffect(blurEffect: UIBlurEffect.Style = .extraLight) {
         for view in subviews {
@@ -41,8 +46,12 @@ extension FrostyView {
     }
 }
 
+// FrostyCornerView is a cornered FrostView
+// ----------------------------------------
 class FrostyCornerView: FrostyView {
     
+    // Inspectable in Xcode
+    // --------------------
     @IBInspectable var customCornerRadius: CGFloat = 19.5
     @IBInspectable var customBlurEffect: UIBlurEffect.Style = .light
     

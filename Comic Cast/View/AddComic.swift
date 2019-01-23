@@ -55,7 +55,7 @@ class AddComic: UIView {
     public func uploadRequest(completion: Completion? = nil) {
         setProgress(progress: 1.0, animated: true, alpha: 1.0, delay: 0.05, duration: 4.2, completion: nil)
         if let image = self.comicImageView.image {
-            let comic = Comic(comicID: 0, comicName: "", num: 99, title: comicTitleTextField.text ?? "", alt: comicAltTextField.text ?? "", img: "", logo: "")
+            let comic = Comic(comicID: 0, comicName: "", comicNumber: 99, episodeTitle: comicTitleTextField.text ?? "", episodeInfo: comicAltTextField.text ?? "", imgURL: "", logoURL: "")
             self.completion!()
             /*
             DataService.instance.post(image: image, to: item, completion: {
@@ -137,7 +137,7 @@ class AddComic: UIView {
     
     // Initialize Data
     public func initData(comic: Comic?, completion: Completion? = nil) {
-        if let comic = comic?.title {
+        if let comic = comic?.episodeTitle {
             print(comic)
         }
         self.completion = completion

@@ -6,5 +6,13 @@ target 'Comic Cast' do
   use_frameworks!
 
   # Pods for Comic Cast
+pod 'Firebase'
 pod 'Firebase/Core'
+pod 'Firebase/Auth'
+pod 'Firebase/Storage'
+pod 'Firebase/Database'
+# pod 'Firebase/Messaging'
+pod 'SwiftKeychainWrapper'
+# pod 'RevealingSplashView'
+# pod 'RAMAnimatedTabBarController'
 end

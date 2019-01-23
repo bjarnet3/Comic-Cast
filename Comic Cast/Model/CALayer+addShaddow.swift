@@ -19,7 +19,7 @@ extension CALayer {
             self.contents = nil
             
             if let sublayer = sublayers?.first,
-                sublayer.name == "Constants.contentLayerName" {
+                sublayer.name == "Constants.subLayerName" {
                 sublayer.removeFromSuperlayer()
             }
             
@@ -33,8 +33,8 @@ extension CALayer {
         }
     }
     
-    func addShadow(offset: CGSize? = nil, opacity: Float = 0.25, radius: CGFloat = 3, color: UIColor = .black) {
-        self.shadowOffset = offset ?? CGSize(width: 1, height: 1)
+    func addShadow(offset: CGSize? = nil, opacity: Float = 0.45, radius: CGFloat = 4, color: UIColor = .darkGray) {
+        self.shadowOffset = offset ?? CGSize(width: 3, height: 3)
         self.shadowOpacity = opacity
         self.shadowRadius = radius
         self.shadowColor = color.cgColor

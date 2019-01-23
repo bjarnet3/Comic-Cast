@@ -12,11 +12,18 @@ import Foundation
 // ---------------------------
 class Comic {
     var comicID: Int
+    var comicUID: String?
     var comicName: String?
+    var comicNumber: Int?
     
-    var id: String?
-    var num: Int?
-    var title: String?
+    var seasonID: Int?
+    var seasonTitle: String?
+    
+    var episodeID: Int?
+    var episodeUID: String?
+    var episodeTitle: String?
+    var episodeInfo: String?
+    var episodeVote: Int = 0
     
     var day: String?
     var month: String?
@@ -24,22 +31,21 @@ class Comic {
     
     var link: String?
     var news: String?
-    var alt: String?
-    
+
     var local: Bool = false
     var fav: Bool = false
     
-    var img: String?
-    var logo: String?
+    var imgURL: String?
+    var logoURL: String?
     
-    init(comicID: Int, comicName: String?, num: Int?, title: String?, alt: String?, img: String?, logo: String?) {
+    init(comicID: Int, comicName: String?, comicNumber: Int?, episodeTitle: String?, episodeInfo: String?, imgURL: String?, logoURL: String?) {
         self.comicID = comicID
         self.comicName = comicName
-        self.num = num
-        self.title = title
-        self.alt = alt
-        self.img = img
-        self.logo = logo
+        self.comicNumber = comicNumber
+        self.episodeTitle = episodeTitle
+        self.episodeInfo = episodeInfo
+        self.imgURL = imgURL
+        self.logoURL = logoURL
     }
     
 }

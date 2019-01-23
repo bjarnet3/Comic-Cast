@@ -117,3 +117,87 @@ public func removeParallaxEffectOnView(_ view: UIView) {
         view.removeMotionEffect(motion)
     }
 }
+
+/// Animate only chosen sequence of cells with delay
+/// -------------------------------------
+public func animate(in collectionView: UICollectionView, completion: Completion? = nil) {
+    let delay = 0.02
+    
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay) {
+        collectionView.alpha = 0
+        
+        let cells = collectionView.visibleCells
+        let sections = collectionView.visibleSupplementaryViews(ofKind: UICollectionView.elementKindSectionHeader)
+        
+        for cell in cells { cell.alpha = 0 }
+        for section in sections { section.alpha = 0 }
+        
+        collectionView.alpha = 1
+        
+        var index = 0
+        for cell in cells {
+            cell.transform = CGAffineTransform(scaleX: 0.65, y: 0.65)
+            UIView.animate(withDuration: 0.805, delay: 0.050 * Double(index), usingSpringWithDamping: 1.3, initialSpringVelocity: 0.5, options: .allowAnimatedContent, animations: {
+                cell.transform = CGAffineTransform(scaleX: 1, y: 1)
+                cell.alpha = 1
+                cell.updateFocusIfNeeded()
+            })
+            index += 1
+        }
+        
+        var idx = 0
+        for section in sections {
+            section.transform = CGAffineTransform(scaleX: 0.80, y: 0.80)
+            UIView.animate(withDuration: 0.505, delay: 0.06 * Double(index), usingSpringWithDamping: 1.3, initialSpringVelocity: 0.5, options: .allowAnimatedContent, animations: {
+                
+                section.transform = CGAffineTransform(scaleX: 1, y: 1)
+                section.alpha = 1
+                section.updateFocusIfNeeded()
+            })
+            idx += 1
+        }
+        completion?()
+    }
+}
+
+/// Animate only chosen sequence of cells with delay
+/// -------------------------------------
+public func animate(out collectionView: UICollectionView, completion: Completion? = nil) {
+    let delay = 0.02
+    
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay) {
+        collectionView.alpha = 1
+        
+        let cells = collectionView.visibleCells
+        let sections = collectionView.visibleSupplementaryViews(ofKind: UICollectionView.elementKindSectionHeader)
+        
+        for cell in cells { cell.alpha = 1 }
+        for section in sections { section.alpha = 1}
+
+        var index = 0
+        for cell in cells {
+            cell.transform = CGAffineTransform(scaleX: 1, y: 1)
+            UIView.animate(withDuration: 0.705, delay: 0.065 * Double(index), usingSpringWithDamping: 1.3, initialSpringVelocity: 0.5, options: .allowAnimatedContent, animations: {
+                
+                cell.transform = CGAffineTransform(scaleX: 0.65, y: 0.65)
+                cell.alpha = 0
+                cell.updateFocusIfNeeded()
+            })
+            index += 1
+        }
+        
+        var idx = 0
+        for section in sections {
+            section.transform = CGAffineTransform(scaleX: 1, y: 1)
+            UIView.animate(withDuration: 0.705, delay: 0.06 * Double(index), usingSpringWithDamping: 1.3, initialSpringVelocity: 0.5, options: .allowAnimatedContent, animations: {
+                
+                section.transform = CGAffineTransform(scaleX: 0.80, y: 0.80)
+                section.alpha = 0
+                section.updateFocusIfNeeded()
+            })
+            idx += 1
+        }
+        
+        completion?()
+    }
+}

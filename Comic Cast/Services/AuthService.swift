@@ -12,7 +12,7 @@ import Firebase
 import SwiftKeychainWrapper
 
 public enum Service {
-    // case Facebook
+    case Facebook
     case Firebase
     case Email
     case All
@@ -25,6 +25,8 @@ public enum State: String {
     case background = "background"
     case terminate = "terminate"
 }
+
+
 
 public func returnState(state: String) -> State? {
     return State(rawValue: state)
@@ -67,6 +69,34 @@ class AuthService {
     var passWord: String? = "1234567"
     
     var signedIn: Bool = false
+    var authMessage: String? {
+        didSet {
+            let message = self.authMessage ?? "nil"
+            print(message)
+        }
+    }
+    
+    func signIn(with userID: String) {
+        KeychainWrapper.standard.set(userID, forKey: KEY_UID)
+        signedIn = true
+    }
+    
+    func signOut(service: Service = .All) {
+        switch service {
+        case .Facebook: break
+        // self.facebookLogout()
+        case .Firebase:
+            try! Auth.auth().signOut()
+        case .Email:
+            try! Auth.auth().signOut()
+            self.signedIn = false
+        default:
+            _ = KeychainWrapper.standard.removeObject(forKey: KEY_UID)
+            try! Auth.auth().signOut()
+            self.signedIn = false
+            AuthService.instance.user = nil
+        }
+    }
     
     func setUser(user: User?) {
         if let user = user {

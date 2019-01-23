@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 /// Haptic Engine Types
 public enum HapticEngineTypes {
@@ -200,4 +201,62 @@ public func animate(out collectionView: UICollectionView, completion: Completion
         
         completion?()
     }
+}
+/*
+public func setMapBackgroundOverlay(mapName: MapStyleForView, mapView: MKMapView) {
+    // We first need to have the path of the overlay configuration JSON
+    guard let overlayFileURLString = Bundle.main.path(forResource: mapName.rawValue, ofType: "json") else {
+        return
+    }
+    let overlayFileURL = URL(fileURLWithPath: overlayFileURLString)
+    // After that, you can create the tile overlay using MapKitGoogleStyler
+    guard let tileOverlay = try? MapKitGoogleStyler.buildOverlay(with: overlayFileURL) else {
+        return
+    }
+    // And finally add it to your MKMapView
+    mapView.add(tileOverlay)
+}
+ */
+
+// Overlay / MapOverlay
+// -------------------
+public func addCirleMaskWithFrostOn(_ subView: UIView) {
+    // Create the view
+    let blurEffect = UIBlurEffect(style: .extraLight)
+    let maskView = UIVisualEffectView(effect: blurEffect)
+    maskView.frame = subView.bounds
+    
+    // Set the radius to 1/3 of the screen width
+    let radius : CGFloat = subView.bounds.width / 2.6 //  subView.bounds.width/2.6
+    
+    // Create a path with the rectangle in it.
+    let path = UIBezierPath(rect: subView.bounds)
+    // Put a circle path in the middle
+    path.addArc(withCenter: subView.center, radius: radius, startAngle: 0.0, endAngle: CGFloat(2*CGFloat.pi), clockwise: true)
+    
+    // Create the shapeLayer
+    // ---------------------
+    let shapeLayer = CAShapeLayer()
+    shapeLayer.path = path.cgPath
+    shapeLayer.fillRule = CAShapeLayerFillRule.evenOdd
+    
+    // Create the boarderLayer
+    // -----------------------
+    let boarderLayer = CAShapeLayer()
+    boarderLayer.path = UIBezierPath(arcCenter: subView.center, radius: radius, startAngle: 0.0, endAngle: CGFloat(2*CGFloat.pi), clockwise: true).cgPath
+    boarderLayer.lineWidth = 1.5
+    boarderLayer.strokeColor = UIColor.white.cgColor
+    boarderLayer.fillColor = nil
+    
+    // add shapeLayer to maskView
+    maskView.layer.mask = shapeLayer
+    // set properties
+    maskView.clipsToBounds = false
+    maskView.layer.borderColor = UIColor.gray.cgColor
+    maskView.backgroundColor = nil
+    // maskView.layer.masksToBounds = true
+    maskView.layer.addSublayer(boarderLayer)
+    // add mask to mapView
+    addParallaxEffectOnView(maskView, 12)
+    subView.addSubview(maskView)
 }

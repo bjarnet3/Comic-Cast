@@ -30,7 +30,6 @@ class LibraryViewController: UIViewController {
         }
     }
     
-    
     // MARK: - Properties: Array & Varables
     // -------------------------------------
     public var comics = [0:[Comic]()]

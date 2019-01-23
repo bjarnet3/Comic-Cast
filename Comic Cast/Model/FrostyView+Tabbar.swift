@@ -28,7 +28,7 @@ class FrostyView: UIView {
 // Frost effect on FrostView
 // -------------------------
 extension FrostyView {
-    func setEffect(blurEffect: UIBlurEffect.Style = .extraLight) {
+    func setEffect(blurEffect: UIBlurEffect.Style = .light) {
         for view in subviews {
             if view is UIVisualEffectView {
                 view.removeFromSuperview()
@@ -52,11 +52,13 @@ class FrostyCornerView: FrostyView {
     
     // Inspectable in Xcode
     // --------------------
-    @IBInspectable var customCornerRadius: CGFloat = 19.5
+    @IBInspectable var customCornerRadius: CGFloat = 20.0
     @IBInspectable var customBlurEffect: UIBlurEffect.Style = .light
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        
+        self.clipsToBounds = true
         self.layer.cornerRadius = customCornerRadius
         self.layer.borderWidth = 0.2
         self.layer.borderColor = WHITE_ALPHA.cgColor
@@ -72,7 +74,7 @@ class FrostyTabBar: UITabBar {
 }
 
 extension FrostyTabBar {
-    func setEffect(blurEffect: UIBlurEffect.Style = .light) {
+    func setEffect(blurEffect: UIBlurEffect.Style = .extraLight) {
         for view in subviews {
             if view is UIVisualEffectView {
                 view.removeFromSuperview()

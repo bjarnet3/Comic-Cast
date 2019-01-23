@@ -12,34 +12,58 @@ import Firebase
 // KeychainWrapper
 import SwiftKeychainWrapper
 
-
 // Home Sweet Home...
 // -----------------------------------------
 class HomeViewController: UIViewController {
 
     @IBOutlet weak var loginView: FrostyCornerView!
+    
     @IBOutlet weak var loginUserName: UITextField!
     @IBOutlet weak var loginPassWord: UITextField!
-    @IBOutlet weak var loginImageView: UIImageView!
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var profileName: UITextField!
+    @IBOutlet weak var profileAddress: UITextField!
+    @IBOutlet weak var profileAge: UITextField!
+    @IBOutlet weak var profileGender: UITextField!
     
     @IBOutlet weak var batMessageView: FrostyCornerView!
     @IBOutlet weak var batMessage: UILabel!
     @IBOutlet weak var batMessageClose: UIButton!
     @IBOutlet weak var batMessageOK: UIButton!
     
+    @IBOutlet weak var backgroundScrollView: UIScrollView!
     
     private var batMessageShowing = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupScrollView()
+        setupBatMessage()
+    }
+    
+    func setupBatMessage() {
         self.exitBatMessage()
         self.batMessageClose.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         self.batMessageClose.layer.cornerRadius = self.batMessageClose.frame.height / 2
         
         self.batMessageOK.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         self.batMessageOK.layer.cornerRadius = self.batMessageClose.frame.height / 2
-        // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    func setupScrollView() {
+        if let image = UIImage(named: "U0Y2pqS") {
+            // let patternImage = UIColor(patternImage: image)
+            let imageView = UIImageView(image: image)
+            imageView.contentMode = .scaleAspectFill
+            // imageView.contentScaleFactor = 1.0
+            // self.backgroundScrollView.backgroundColor = patternImage
+            self.backgroundScrollView.addSubview(imageView)
+        }
+    }
+    
+    func setupLogin() {
+        self.profileImage.layer.cornerRadius = 18.0
     }
     
     // MARK: - LOGIN ACTION FUNCTIONS
@@ -55,6 +79,10 @@ class HomeViewController: UIViewController {
         emailRegister()
     }
     
+    @IBAction func setProfileImg(_ sender: Any) {
+        getImageFromPicker()
+    }
+    
     @IBAction func tapBackgroundView(_ sender: Any) {
         self.view.endEditing(true)
     }
@@ -62,8 +90,6 @@ class HomeViewController: UIViewController {
     @IBAction func exitBatMessageAction(_ sender: Any) {
         exitBatMessage(delay: 0.05)
     }
-    
-    
 
     // MARK: - EMAIL AUTHENTICATION & EMAIL REGISTER
     func emailLogin() {
@@ -83,14 +109,16 @@ class HomeViewController: UIViewController {
                         // 2. Run login "Animations"
                         // 3. Show signOutViw
                         
-                        // self.batMessage.text = authMessage
+                        self.batMessage.text = authMessage
+                        self.batAlertMessage()
                     }
                 } else {
                     let authMessage = "Wrong Email or Password"
                     AuthService.instance.authMessage = authMessage
                     AuthService.instance.signOut(service: .Email)
                     // SHOW DIALOG BOX WITH - WRONG EMAIL or PASSWORD
-                    // self.batMessage.text = authMessage
+                    self.batMessage.text = authMessage
+                    self.batAlertMessage()
                 }
             })
         }
@@ -105,7 +133,7 @@ class HomeViewController: UIViewController {
                     AuthService.instance.authMessage = authMessage
                     AuthService.instance.signOut(service: .Email)
                     
-                    // self.batMessage.text = authMessage
+                    self.batMessage.text = authMessage
                 } else {
                     if let userID = auth?.user.uid {
                         hapticButton(.success)
@@ -113,10 +141,13 @@ class HomeViewController: UIViewController {
                         AuthService.instance.authMessage = authMessage
                         AuthService.instance.signIn(with: userID)
                         
-                        // self.batMessage.text = authMessage
+                        self.batMessage.text = authMessage
                         let userData = [
                             "userID": userID,
                             "userEmail": email,
+                            "userAddress": self.profileAddress.text ?? "",
+                            "userAge": self.profileAge.text ?? "",
+                            "userGender": self.profileGender.text ?? ""
                             ]
                         self.completeRegister(id: userID, userData: userData)
                     }
@@ -129,7 +160,6 @@ class HomeViewController: UIViewController {
         DataService.instance.createFirbaseDBUser(uid: id, userData: userData)
         KeychainWrapper.standard.set(id, forKey: KEY_UID)
     }
-
 
 }
 
@@ -176,7 +206,25 @@ extension HomeViewController {
         }
     }
     
+}
+
+// MARK: - UIImagePicker & UINavigationControllerDelegate
+// ------------------------------------------------------
+extension HomeViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func getImageFromPicker() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self //  self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.allowsEditing = false
+        self.present(imagePicker, animated: false)
+    }
     
-    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            self.profileImage.image = image
+            // self.postImageToFirebase(image: image)
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 

@@ -69,6 +69,16 @@ class DataService {
         REF.updateChildValues(userData)
     }
     
+    func post(userData: [String: Any]?, to user: User, completion: Completion? = nil) {
+        if let userUID = user.userID {
+            let REF = REF_USERS.child(userUID)
+            if let userData = userData {
+                REF.updateChildValues(userData)
+            }
+        }
+        completion?()
+    }
+    
     func postTo(comic: Comic, completion: Completion? = nil) {
         if let comicUID = comic.comicUID {
             let REF = REF_COMICS.child(comicUID).child("episode")
@@ -91,7 +101,6 @@ class DataService {
                 // Generic Function
                 // if let imgData = UIImageJPEGRepresentation(img, 0.4) {
                 if let imgData = img.jpegData(compressionQuality: 0.4) {
-                    
                     // Unique image identifier
                     let imageUID = NSUUID().uuidString
                     // Set metaData for the image
@@ -122,6 +131,50 @@ class DataService {
                     }
                     
                 }
+            }
+        }
+    }
+    
+    
+    func post(image: UIImage?, to user: User?, completion: Completion? = nil) {
+        if let userID = /* KeychainWrapper.standard.string(forKey: KEY_UID) */ AuthService.instance.userUID {
+            if let img = image {
+                // Generic Function
+                // if let imgData = UIImageJPEGRepresentation(img, 0.4) {
+                if let imgData = img.jpegData(compressionQuality: 0.4) {
+                    // Unique image identifier
+                    let imageUID = NSUUID().uuidString
+                    // Set metaData for the image
+                    let metadata = StorageMetadata()
+                    metadata.contentType = "image/jpeg"
+                    // Upload image - STORAGE_BASE.child("post-pics").child(uniqueID).put(image, meta)
+                    let storageREF = DataService.instance.REF_PROFILE_IMAGES.child(userID).child("library").child("\(imageUID).jpg")
+                    storageREF.putData(imgData, metadata: metadata) { (metadata, error) in
+                        if error != nil {
+                            print("postImageToFirebase: Unable to upload image to Firebase storage")
+                            print(error!)
+                        } else {
+                            print("postImageToFirebase: Successfully uploaded image to Firebase storage")
+                            storageREF.downloadURL { (url, err) in
+                                if let absoluteUrlString = url?.absoluteString {
+                                    if let user = user {
+                                        let imageURL = absoluteUrlString
+                                        
+                                        let userData: [String: Any] = [
+                                            "imageURL" : imageURL
+                                        ]
+                                        self.post(userData: userData, to: user)
+                                        completion?()
+                                    } else {
+                                        print("unable to get imageLocation")
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+                
             }
         }
     }

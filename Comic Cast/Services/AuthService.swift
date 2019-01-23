@@ -26,8 +26,6 @@ public enum State: String {
     case terminate = "terminate"
 }
 
-
-
 public func returnState(state: String) -> State? {
     return State(rawValue: state)
 }

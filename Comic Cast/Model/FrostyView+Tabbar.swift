@@ -53,7 +53,7 @@ class FrostyCornerView: FrostyView {
     // Inspectable in Xcode
     // --------------------
     @IBInspectable var customCornerRadius: CGFloat = 20.0
-    @IBInspectable var customBlurEffect: UIBlurEffect.Style = .light
+    @IBInspectable var customBlurEffect: UIBlurEffect.Style = .extraLight
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

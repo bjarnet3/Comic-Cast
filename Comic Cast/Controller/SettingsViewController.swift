@@ -10,10 +10,16 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
+    // MARK: - IBOutlet: Connection to View "storyboard"
+    // -------------------------------------------------
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK: - Properties: Array & Varables
+    // -------------------------------------
     var settings = [Settings]()
 
+    // MARK: - ViewDidLoad, ViewWillLoad etc...
+    // ----------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,6 +30,8 @@ class SettingsViewController: UIViewController {
     }
 }
 
+// MARK: - UITableView, Delegate & Datasource
+// -----------------------------------------------
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

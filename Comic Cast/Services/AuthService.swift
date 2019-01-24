@@ -41,7 +41,7 @@ class AuthService {
     var user: User? = nil {
         didSet {
             if let user = self.user {
-                self.userUID = user.userID
+                self.userUID = user.userUID
             }
         }
     }

@@ -35,6 +35,8 @@
 		5CE2322521F4ABF40035F49F /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE2322421F4ABF40035F49F /* LibraryViewController.swift */; };
 		5CE2322A21F4ABF60035F49F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CE2322921F4ABF60035F49F /* Assets.xcassets */; };
 		5CE2322D21F4ABF60035F49F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CE2322B21F4ABF60035F49F /* LaunchScreen.storyboard */; };
+		5CF7991D21F94BC900178E19 /* UXTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF7991C21F94BC900178E19 /* UXTextField.swift */; };
+		5CF7991F21F96A3700178E19 /* LibraryDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF7991E21F96A3700178E19 /* LibraryDetailVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +70,8 @@
 		5CE2322921F4ABF60035F49F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5CE2322C21F4ABF60035F49F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5CE2322E21F4ABF60035F49F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5CF7991C21F94BC900178E19 /* UXTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXTextField.swift; sourceTree = "<group>"; };
+		5CF7991E21F96A3700178E19 /* LibraryDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryDetailVC.swift; sourceTree = "<group>"; };
 		64B5DB6D21228F1CDF949E37 /* Pods_Comic_Cast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Comic_Cast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC6D81D45BF39DF338B0DF30 /* Pods-Comic Cast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Comic Cast.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Comic Cast/Pods-Comic Cast.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -89,6 +93,7 @@
 			children = (
 				5CE2322221F4ABF40035F49F /* HomeViewController.swift */,
 				5CE2322421F4ABF40035F49F /* LibraryViewController.swift */,
+				5CF7991E21F96A3700178E19 /* LibraryDetailVC.swift */,
 				5C10748921F4BC910076DFB3 /* CastViewController.swift */,
 				5C10748B21F4BCA40076DFB3 /* SettingsViewController.swift */,
 			);
@@ -126,6 +131,7 @@
 				5CAF19E321F5013F008C0845 /* ComicCollectionCell.swift */,
 				5CDFD95E21F552CD00B032E0 /* ComicCollectionHeader.swift */,
 				5C794E0C21F5DCB700105085 /* SettingsTableViewCell.swift */,
+				5CF7991C21F94BC900178E19 /* UXTextField.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -330,8 +336,10 @@
 				5CAF19EA21F5048A008C0845 /* PrintDebug.swift in Sources */,
 				5CAF19E621F50382008C0845 /* Functions.swift in Sources */,
 				5C794E0D21F5DCB700105085 /* SettingsTableViewCell.swift in Sources */,
+				5CF7991D21F94BC900178E19 /* UXTextField.swift in Sources */,
 				5C1D38A721F7ACB300085371 /* AuthService.swift in Sources */,
 				5CAF19DC21F4F618008C0845 /* Comic.swift in Sources */,
+				5CF7991F21F96A3700178E19 /* LibraryDetailVC.swift in Sources */,
 				5CDFD95F21F552CD00B032E0 /* ComicCollectionHeader.swift in Sources */,
 				5C10748A21F4BC910076DFB3 /* CastViewController.swift in Sources */,
 				5C1D38A921F7AE1800085371 /* User.swift in Sources */,

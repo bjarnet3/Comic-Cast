@@ -10,15 +10,15 @@ import Foundation
 
 class User {
     
-    var userID: String?
+    var userUID: String?
     private var userName: String?
     private var userPass: String?
     
     private var comic: Comic?
     private var comics: [Comic]?
     
-    init(userID: String, userName: String, userPass: String) {
-        self.userID = userID
+    init(userUID: String, userName: String, userPass: String) {
+        self.userUID = userUID
         self.userName = userName
         self.userPass = userPass
     }

@@ -16,24 +16,29 @@ import SwiftKeychainWrapper
 // -----------------------------------------
 class HomeViewController: UIViewController {
 
+    // MARK: - IBOutlet: Connection to View "storyboard"
+    // -------------------------------------------------
+    @IBOutlet weak var registerView: FrostyCornerView!
     @IBOutlet weak var loginView: FrostyCornerView!
     
-    @IBOutlet weak var loginUserName: UITextField!
-    @IBOutlet weak var loginPassWord: UITextField!
+    @IBOutlet weak var loginUserName: UXTextField!
+    @IBOutlet weak var loginPassWord: UXTextField!
     @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var profileName: UITextField!
-    @IBOutlet weak var profileAddress: UITextField!
-    @IBOutlet weak var profileAge: UITextField!
-    @IBOutlet weak var profileGender: UITextField!
+    @IBOutlet weak var profileName: UXTextField!
+    @IBOutlet weak var profileAge: UXTextField!
+    @IBOutlet weak var profileGender: UXTextField!
     
     @IBOutlet weak var batMessageView: FrostyCornerView!
     @IBOutlet weak var batMessage: UILabel!
     @IBOutlet weak var batMessageClose: UIButton!
-    @IBOutlet weak var batMessageOK: UIButton!
     
     @IBOutlet weak var backgroundScrollView: UIScrollView!
     
+    // MARK: - Properties: Array & Varables
+    // -------------------------------------
     private var batMessageShowing = true
+    private var loginViewShowing = true
+    private var registerViewShowing = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,11 +49,11 @@ class HomeViewController: UIViewController {
     
     func setupBatMessage() {
         self.exitBatMessage()
+        /*
         self.batMessageClose.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         self.batMessageClose.layer.cornerRadius = self.batMessageClose.frame.height / 2
-        
-        self.batMessageOK.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
-        self.batMessageOK.layer.cornerRadius = self.batMessageClose.frame.height / 2
+        */
+        self.batMessageView.layer.cornerRadius = self.batMessageView.frame.height / 2
     }
     
     func setupScrollView() {
@@ -63,10 +68,18 @@ class HomeViewController: UIViewController {
     }
     
     func setupLogin() {
+        self.exitLoginView()
         self.profileImage.layer.cornerRadius = 18.0
     }
     
-    // MARK: - LOGIN ACTION FUNCTIONS
+    // Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
+    // MARK: - IBAction: Methods connected to UI
+    // -----------------------------------------
     @IBAction func signInAction(_ sender: Any) {
         emailLogin()
     }
@@ -88,22 +101,50 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func exitBatMessageAction(_ sender: Any) {
-        exitBatMessage(delay: 0.05)
+        exitBatMessage(delay: 0.0)
+    }
+    
+    @IBAction func batMessageAlertAction(_ sender: Any) {
+        self.batAlertMessage()
+    }
+    
+    @IBAction func loginViewAction(_ sender: Any) {
+        if !loginViewShowing {
+            exitAllView()
+            enterLoginView()
+        } else {
+            exitLoginView()
+        }
+    }
+    
+    @IBAction func registerViewAction(_ sender: Any) {
+        if !registerViewShowing {
+            exitAllView()
+            enterRegisterView()
+        } else {
+            exitRegisterView()
+        }
+    }
+    
+    @IBAction func resignKeyboard(_ sender: Any) {
+        dismissKeyboard()
     }
 
     // MARK: - EMAIL AUTHENTICATION & EMAIL REGISTER
+    // ---------------------------------------------
     func emailLogin() {
-        if let email = AuthService.instance.userName, let pwd = AuthService.instance.passWord {
+        dismissKeyboard()
+        if let email = self.loginUserName.text, let pwd = self.loginPassWord.text {
             Auth.auth().signIn(withEmail: email, password: pwd, completion: { (auth, error) in
                 if error == nil {
                     let authMessage = "PRINT: Email user authenticated with Firebase"
                     AuthService.instance.authMessage = authMessage
                     self.enterBatMessage()
                     
-                    if let userID = auth?.user.uid {
-                        let user = User(userID: userID, userName: email, userPass: pwd)
+                    if let userUID = auth?.user.uid {
+                        let user = User(userUID: userUID, userName: email, userPass: pwd)
                         AuthService.instance.setUser(user: user)
-                        AuthService.instance.signIn(with: userID)
+                        AuthService.instance.signIn(with: userUID)
                         // let name = "Bjarne"
                         // 1. Get info from database, and load to labels and buttons
                         // 2. Run login "Animations"
@@ -125,87 +166,157 @@ class HomeViewController: UIViewController {
     }
     
     func emailRegister() {
-        if let email = AuthService.instance.userName, let pwd = AuthService.instance.passWord {
+        dismissKeyboard()
+        if let email = self.loginUserName.text, let pwd = self.loginPassWord.text {
             Auth.auth().createUser(withEmail: email, password: pwd, completion: { (auth, error) in
-                if auth != nil {
+                if error != nil {
                     let authMessage = "PRINT: Unable to Login with Error \(String(describing: error))"
+                    print(authMessage)
                     hapticButton(.error)
                     AuthService.instance.authMessage = authMessage
                     AuthService.instance.signOut(service: .Email)
                     
                     self.batMessage.text = authMessage
                 } else {
-                    if let userID = auth?.user.uid {
+                    if let userUID = auth?.user.uid {
+                        let user = User(userUID: userUID, userName: email, userPass: pwd)
                         hapticButton(.success)
                         let authMessage = "PRINT: Email login success"
+                        print(authMessage)
                         AuthService.instance.authMessage = authMessage
-                        AuthService.instance.signIn(with: userID)
+                        AuthService.instance.signIn(with: userUID)
                         
                         self.batMessage.text = authMessage
                         let userData = [
-                            "userID": userID,
+                            "userUID": userUID,
                             "userEmail": email,
-                            "userAddress": self.profileAddress.text ?? "",
-                            "userAge": self.profileAge.text ?? "",
-                            "userGender": self.profileGender.text ?? ""
+                            "userName" : self.profileName.text ?? "unknown",
+                            "userAge": self.profileAge.text ?? "unknown",
+                            "userGender": self.profileGender.text ?? "no gender"
                             ]
-                        self.completeRegister(id: userID, userData: userData)
+                        let profileImage = self.profileImage.image
+                        self.completeRegister(user: user, userData: userData, userImage: profileImage)
                     }
                 }
             })
         }
     }
     
-    func completeRegister(id: String, userData: [String : String]) {
-        DataService.instance.createFirbaseDBUser(uid: id, userData: userData)
-        KeychainWrapper.standard.set(id, forKey: KEY_UID)
-    }
-
-}
-
-extension HomeViewController {
-    func batAlertMessage() {
-        if batMessageShowing {
-            exitBatMessage(completion: {
-                self.enterBatMessage(completion: {
-                    self.exitBatMessage()
-                }, delay: 2.0)
-            }, delay: 0.0)
-        } else {
-            enterBatMessage(completion: {
-                self.exitBatMessage(delay: 0.5)
-            }, delay: 2.2)
+    func completeRegister(user: User, userData: [String : String], userImage: UIImage?) {
+        if let userUID = user.userUID {
+            DataService.instance.createFirbaseDBUser(uid: userUID, userData: userData)
+            KeychainWrapper.standard.set(userUID, forKey: KEY_UID)
+            if let profileImage = userImage {
+                DataService.instance.post(image: profileImage, to: user, completion: {
+                    printDebug(object: "SUCCESS")
+                })
+            }
         }
     }
     
-    func enterBatMessage(completion: Completion? = nil, delay: Double = 2.0) {
+}
+
+// MARK: - Animations & Messages
+// -----------------------------
+extension HomeViewController {
+    func batAlertMessage() {
+        if batMessageShowing {
+            exitBatMessage(delay: 3.0)
+        } else {
+            enterBatMessage(completion: {
+                self.exitBatMessage(delay: 2.5)
+            })
+        }
+    }
+    
+    func enterBatMessage(completion: Completion? = nil, delay: Double = 0.0) {
         if !batMessageShowing {
-            UIView.animate(withDuration: 0.56, delay: delay, usingSpringWithDamping: 0.68, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 0.56, delay: delay, usingSpringWithDamping: 0.68, initialSpringVelocity: 0.3, options: .curveEaseIn, animations: {
                 
                 self.batMessageView.alpha = 1.0
                 self.batMessageView.isUserInteractionEnabled = true
                 
-                self.batMessageView.transform = CGAffineTransform(translationX: 0, y: -15.0)
+                self.batMessageView.transform = CGAffineTransform(translationX: 0, y: -12.8)
                 self.batMessageShowing = true
             })
             completion?()
         }
     }
     
-    func exitBatMessage(completion: Completion? = nil, delay: Double = 2.0) {
+    func exitBatMessage(completion: Completion? = nil, delay: Double = 0.0) {
         if batMessageShowing {
             UIView.animate(withDuration: 0.55, delay: delay, usingSpringWithDamping: 0.67, initialSpringVelocity: 0.31, options: .curveEaseOut, animations: {
                 
                 self.batMessageView.alpha = 0.0
                 self.batMessageView.isUserInteractionEnabled = false
                 
-                self.batMessageView.transform = CGAffineTransform(translationX: 0, y: 15.0)
+                self.batMessageView.transform = CGAffineTransform(translationX: 0, y: 12.8)
                 self.batMessageShowing = false
             })
             completion?()
         }
     }
     
+    func enterLoginView(completion: Completion? = nil, delay: Double = 0.0) {
+        if !loginViewShowing {
+            UIView.animate(withDuration: 0.56, delay: delay, usingSpringWithDamping: 0.68, initialSpringVelocity: 0.3, options: .curveEaseIn, animations: {
+                
+                self.loginView.alpha = 1.0
+                self.loginView.isUserInteractionEnabled = true
+                
+                self.loginView.transform = CGAffineTransform(translationX: 0, y: -12.8)
+                self.loginViewShowing = true
+            })
+            completion?()
+        }
+    }
+    
+    func exitLoginView(completion: Completion? = nil, delay: Double = 0.0) {
+        if loginViewShowing {
+            UIView.animate(withDuration: 0.55, delay: delay, usingSpringWithDamping: 0.67, initialSpringVelocity: 0.31, options: .curveEaseOut, animations: {
+                
+                self.loginView.alpha = 0.0
+                self.loginView.isUserInteractionEnabled = false
+                
+                self.loginView.transform = CGAffineTransform(translationX: 0, y: 12.8)
+                self.loginViewShowing = false
+            })
+            completion?()
+        }
+    }
+    
+    func enterRegisterView(completion: Completion? = nil, delay: Double = 0.0) {
+        if !registerViewShowing {
+            UIView.animate(withDuration: 0.56, delay: delay, usingSpringWithDamping: 0.68, initialSpringVelocity: 0.3, options: .curveEaseIn, animations: {
+                
+                self.registerView.alpha = 1.0
+                self.registerView.isUserInteractionEnabled = true
+                
+                self.registerView.transform = CGAffineTransform(translationX: 0, y: -12.8)
+                self.registerViewShowing = true
+            })
+            completion?()
+        }
+    }
+    
+    func exitRegisterView(completion: Completion? = nil, delay: Double = 0.0) {
+        if registerViewShowing {
+            UIView.animate(withDuration: 0.55, delay: delay, usingSpringWithDamping: 0.67, initialSpringVelocity: 0.31, options: .curveEaseOut, animations: {
+                
+                self.registerView.alpha = 0.0
+                self.registerView.isUserInteractionEnabled = false
+                
+                self.registerView.transform = CGAffineTransform(translationX: 0, y: 12.8)
+                self.registerViewShowing = false
+            })
+            completion?()
+        }
+    }
+    
+    func exitAllView() {
+        exitLoginView()
+        exitRegisterView()
+    }
 }
 
 // MARK: - UIImagePicker & UINavigationControllerDelegate

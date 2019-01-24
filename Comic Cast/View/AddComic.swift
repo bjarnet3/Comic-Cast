@@ -56,14 +56,10 @@ class AddComic: UIView {
         setProgress(progress: 1.0, animated: true, alpha: 1.0, delay: 0.05, duration: 4.2, completion: nil)
         if let image = self.comicImageView.image {
             let comic = Comic(comicID: 0, comicName: "", comicNumber: 99, episodeTitle: comicTitleTextField.text ?? "", episodeInfo: comicAltTextField.text ?? "", imgURL: "", logoURL: "")
-            self.completion!()
-            /*
-            DataService.instance.post(image: image, to: item, completion: {
-                self.completion?()
-            })
-            */
-            setProgress(progress: 0.0, animated: true, alpha: 0.0, delay: 0.0, duration: 5.2, completion: {
-                completion?()
+            DataService.instance.post(image: image, to: comic, completion: {
+                self.setProgress(progress: 0.0, animated: true, alpha: 0.0, delay: 0.0, duration: 5.2, completion: {
+                    completion?()
+                })
             })
         } else {
             self.pickerImage?()

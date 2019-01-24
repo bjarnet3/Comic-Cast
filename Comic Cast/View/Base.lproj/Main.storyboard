@@ -28,12 +28,24 @@
                                     <outletCollection property="gestureRecognizers" destination="3b6-Ql-dBM" appends="YES" id="BlX-Ri-uJR"/>
                                 </connections>
                             </scrollView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j1I-vH-pDc" customClass="FrostyCornerView" customModule="Comic_Cast" customModuleProvider="target">
-                                <rect key="frame" x="16" y="82" width="343" height="382"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WeU-ym-fVS" customClass="FrostyCornerView" customModule="Comic_Cast" customModuleProvider="target">
+                                <rect key="frame" x="16" y="100" width="343" height="198"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="  Username / Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ahg-5E-HIM">
-                                        <rect key="frame" x="16" y="180" width="313" height="52"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="raF-QP-64R" customClass="CustomButton" customModule="Comic_Cast" customModuleProvider="target">
+                                        <rect key="frame" x="15" y="138" width="192" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                        <state key="normal" title="LOGIN">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="signInAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="AH8-mn-uJJ"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="  Username / Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0O2-Bu-a6g">
+                                        <rect key="frame" x="15" y="18" width="313" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -41,18 +53,34 @@
                                         <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="23"/>
                                         <textInputTraits key="textInputTraits" textContentType="username"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNG-en-isX" customClass="CustomButton" customModule="Comic_Cast" customModuleProvider="target">
-                                        <rect key="frame" x="15" y="321" width="40" height="40"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="  Password" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ucG-9Y-arl">
+                                        <rect key="frame" x="15" y="78" width="313" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                        <state key="normal" title="OUT"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="24"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lXG-vZ-GgO" customClass="CustomButton" customModule="Comic_Cast" customModuleProvider="target">
+                                        <rect key="frame" x="215" y="138" width="113" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                        <state key="normal" title="NY BRUKER">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
-                                            <action selector="signOutAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="qlm-5k-1V9"/>
+                                            <action selector="registerViewAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="hq3-2T-FOw"/>
                                         </connections>
                                     </button>
+                                </subviews>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j1I-vH-pDc" customClass="FrostyCornerView" customModule="Comic_Cast" customModuleProvider="target">
+                                <rect key="frame" x="16" y="82" width="343" height="313"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NDw-l2-zHf" customClass="CustomButton" customModule="Comic_Cast" customModuleProvider="target">
-                                        <rect key="frame" x="215" y="321" width="113" height="40"/>
+                                        <rect key="frame" x="123" y="253" width="205" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
@@ -63,14 +91,8 @@
                                             <action selector="registerAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="Bvd-eR-nox"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="batman-profil" translatesAutoresizingMaskIntoConstraints="NO" id="rKw-oK-TMb">
-                                        <rect key="frame" x="16" y="51" width="72" height="72"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <gestureRecognizers/>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O4P-qe-0ey" customClass="CustomButton" customModule="Comic_Cast" customModuleProvider="target">
-                                        <rect key="frame" x="15" y="321" width="192" height="40"/>
+                                        <rect key="frame" x="15" y="253" width="100" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
@@ -78,11 +100,28 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="signInAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="8QT-wb-mv4"/>
+                                            <action selector="loginViewAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="BFT-T5-83w"/>
                                         </connections>
                                     </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="  Username / Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ahg-5E-HIM" customClass="UXTextField" customModule="Comic_Cast" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="155" width="327" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" textContentType="email"/>
+                                        <connections>
+                                            <action selector="resignKeyboard:" destination="9pv-A4-QxB" eventType="primaryActionTriggered" id="2mO-ma-qun"/>
+                                        </connections>
+                                    </textField>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="batman-profil" translatesAutoresizingMaskIntoConstraints="NO" id="rKw-oK-TMb">
+                                        <rect key="frame" x="8" y="29" width="72" height="72"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <gestureRecognizers/>
+                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d0s-cI-8aX" customClass="CustomButton" customModule="Comic_Cast" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="131" width="72" height="32"/>
+                                        <rect key="frame" x="8" y="109" width="72" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="14"/>
@@ -93,49 +132,49 @@
                                             <action selector="setProfileImg:" destination="9pv-A4-QxB" eventType="touchUpInside" id="XEu-0r-IwP"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="  Navn" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XXv-Ms-ico">
-                                        <rect key="frame" x="115" y="51" width="213" height="32"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="  Navn" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XXv-Ms-ico" customClass="UXTextField" customModule="Comic_Cast" customModuleProvider="target">
+                                        <rect key="frame" x="95" y="29" width="240" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" textContentType="username"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" textContentType="name"/>
+                                        <connections>
+                                            <action selector="resignKeyboard:" destination="9pv-A4-QxB" eventType="primaryActionTriggered" id="wFb-j4-WYJ"/>
+                                        </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="  Adresse" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kRu-76-6jD">
-                                        <rect key="frame" x="115" y="91" width="213" height="32"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="  Alder" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eaA-d6-1Bx" customClass="UXTextField" customModule="Comic_Cast" customModuleProvider="target">
+                                        <rect key="frame" x="95" y="67" width="240" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" textContentType="username"/>
+                                        <connections>
+                                            <action selector="resignKeyboard:" destination="9pv-A4-QxB" eventType="primaryActionTriggered" id="5cL-da-l8u"/>
+                                        </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="  Alder" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eaA-d6-1Bx">
-                                        <rect key="frame" x="115" y="131" width="101" height="32"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="  Kjønn" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4A3-0E-V8y" customClass="UXTextField" customModule="Comic_Cast" customModuleProvider="target">
+                                        <rect key="frame" x="95" y="109" width="240" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" textContentType="username"/>
+                                        <connections>
+                                            <action selector="resignKeyboard:" destination="9pv-A4-QxB" eventType="primaryActionTriggered" id="JGE-RE-adf"/>
+                                        </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="  Kjønn" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4A3-0E-V8y">
-                                        <rect key="frame" x="227" y="131" width="101" height="32"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="  Password" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gCd-hL-Khw" customClass="UXTextField" customModule="Comic_Cast" customModuleProvider="target">
+                                        <rect key="frame" x="9" y="193" width="326" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" textContentType="username"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="  Password" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gCd-hL-Khw">
-                                        <rect key="frame" x="16" y="240" width="312" height="52"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                        <connections>
+                                            <action selector="resignKeyboard:" destination="9pv-A4-QxB" eventType="primaryActionTriggered" id="mcM-RF-DFp"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -143,43 +182,70 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CvE-Ni-fNh" customClass="FrostyView" customModule="Comic_Cast" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mDC-F5-p8T" customClass="CustomButton" customModule="Comic_Cast" customModuleProvider="target">
+                                        <rect key="frame" x="267" y="28" width="100" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="11"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="BAT MESSAGE"/>
+                                        <connections>
+                                            <action selector="batMessageAlertAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="tL6-Uj-hzO"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1sL-7x-VYj" customClass="CustomButton" customModule="Comic_Cast" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="28" width="70" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="LOGIN"/>
+                                        <connections>
+                                            <action selector="loginViewAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="xa3-VJ-VXs"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kpe-HN-uyO" customClass="CustomButton" customModule="Comic_Cast" customModuleProvider="target">
+                                        <rect key="frame" x="86" y="28" width="75" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="REGISTER"/>
+                                        <connections>
+                                            <action selector="registerViewAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="RaU-a1-TN5"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UQJ-RC-Vcs" customClass="FrostyCornerView" customModule="Comic_Cast" customModuleProvider="target">
                                 <rect key="frame" x="5" y="555" width="365" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="moz-ka-Rpk">
-                                        <rect key="frame" x="291" y="28" width="60" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                        <state key="normal" title="OK">
-                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                    </button>
                                     <button opaque="NO" alpha="0.89999997615814209" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2KU-hr-Fgg">
-                                        <rect key="frame" x="291" y="0.0" width="60" height="19"/>
+                                        <rect key="frame" x="306" y="0.0" width="59" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="30"/>
+                                        <color key="tintColor" red="1" green="0.050980392159999999" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="✕">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" red="1" green="0.050980392159999999" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="exitBatMessageAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="Kk9-KC-4DL"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" Bat Text Message System ..." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bXT-PR-qFc">
-                                        <rect key="frame" x="82" y="8" width="201" height="44"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bat Text Message System ...  sdfsadfsfds" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bXT-PR-qFc">
+                                        <rect key="frame" x="88" y="0.0" width="210" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
-                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="batman" translatesAutoresizingMaskIntoConstraints="NO" id="2Pa-Hl-VV7" customClass="CustomImageView" customModule="Comic_Cast" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="8" width="66" height="44"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="batman-5-logo-png-transparent" translatesAutoresizingMaskIntoConstraints="NO" id="2Pa-Hl-VV7">
+                                        <rect key="frame" x="13" y="0.0" width="60" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -196,16 +262,15 @@
                         <outlet property="backgroundScrollView" destination="tfP-n5-YmT" id="ZlP-Lg-A5p"/>
                         <outlet property="batMessage" destination="bXT-PR-qFc" id="dL1-et-zRF"/>
                         <outlet property="batMessageClose" destination="2KU-hr-Fgg" id="pmy-nS-XtH"/>
-                        <outlet property="batMessageOK" destination="moz-ka-Rpk" id="F1d-Aw-z5X"/>
                         <outlet property="batMessageView" destination="UQJ-RC-Vcs" id="Zic-No-sbt"/>
                         <outlet property="loginPassWord" destination="gCd-hL-Khw" id="Ifj-VG-S8c"/>
                         <outlet property="loginUserName" destination="Ahg-5E-HIM" id="iAp-X2-XZP"/>
-                        <outlet property="loginView" destination="j1I-vH-pDc" id="c7v-dm-heJ"/>
-                        <outlet property="profileAddress" destination="kRu-76-6jD" id="hK6-JX-JmN"/>
+                        <outlet property="loginView" destination="WeU-ym-fVS" id="5cn-pw-h6a"/>
                         <outlet property="profileAge" destination="eaA-d6-1Bx" id="FMv-6T-BKY"/>
-                        <outlet property="profileGender" destination="4A3-0E-V8y" id="8Mr-0C-sGn"/>
+                        <outlet property="profileGender" destination="4A3-0E-V8y" id="xQh-8a-Xhd"/>
                         <outlet property="profileImage" destination="rKw-oK-TMb" id="xAm-au-8oW"/>
                         <outlet property="profileName" destination="XXv-Ms-ico" id="sSe-9r-Qoa"/>
+                        <outlet property="registerView" destination="j1I-vH-pDc" id="c7v-dm-heJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
@@ -381,7 +446,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gGE-gh-cnp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="324" y="819.94002998500753"/>
+            <point key="canvasLocation" x="313" y="820"/>
         </scene>
         <!--Settings-->
         <scene sceneID="uus-R4-soD">
@@ -473,7 +538,55 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iCW-GC-k7G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="956" y="819.94002998500753"/>
+            <point key="canvasLocation" x="940" y="820"/>
+        </scene>
+        <!--Library DetailVC-->
+        <scene sceneID="VPF-db-00F">
+            <objects>
+                <viewController storyboardIdentifier="LibraryDetailVC" id="Qxt-XK-5UW" customClass="LibraryDetailVC" customModule="Comic_Cast" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZoB-Ac-SuI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mhb-gP-7pw">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="353"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fdU-HQ-KSW" customClass="FrostyView" customModule="Comic_Cast" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cast" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rAr-P2-K1W">
+                                        <rect key="frame" x="148" y="28" width="79" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zfr-3v-gWz" customClass="CustomButton" customModule="Comic_Cast" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="27" width="80" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                        <state key="normal" title="&lt;- BACK"/>
+                                        <connections>
+                                            <action selector="backAction:" destination="Qxt-XK-5UW" eventType="touchUpInside" id="uqk-lk-EqJ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="JVQ-Jf-CxP"/>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="Mhb-gP-7pw" id="HMn-6G-FWv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0rp-wN-PsE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-314.39999999999998" y="1476.6116941529237"/>
         </scene>
         <!--Comics-->
         <scene sceneID="wg7-f3-ORb">
@@ -660,7 +773,10 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="0.16078431369999999" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                        <state key="normal" title=" DELETE ✖︎ "/>
+                                        <state key="normal" title="SHOW DETAIL"/>
+                                        <connections>
+                                            <action selector="showDetailAction:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="qgh-UF-BuE"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4uC-mr-VDe" customClass="CustomButton" customModule="Comic_Cast" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="89" height="45"/>
@@ -707,11 +823,11 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="0.0" y="0.0"/>
+            <point key="canvasLocation" x="-6" y="-7"/>
         </scene>
     </scenes>
     <resources>
-        <image name="batman" width="300" height="300"/>
+        <image name="batman-5-logo-png-transparent" width="1878.2608642578125" height="1019.7391357421875"/>
         <image name="batman-profil" width="463.5" height="447.75"/>
         <image name="library_placeholder" width="792" height="700"/>
         <image name="library_plus" width="792" height="700"/>

@@ -30,6 +30,12 @@ class LibraryViewController: UIViewController {
         }
     }
     
+    @IBAction func showDetailAction(_ sender: Any) {
+        if let lastCell = lastSelectedCell as? ComicCollectionCell {
+            goToComicDetail(cell: lastCell)
+        }
+    }
+    
     // MARK: - Properties: Array & Varables
     // -------------------------------------
     public var comics = [0:[Comic]()]
@@ -73,7 +79,6 @@ class LibraryViewController: UIViewController {
         let comic10 = Comic(comicID: 0, comicName: "Dilbert", comicNumber: 2, episodeTitle: "Pie Chart", episodeInfo: "I pledge my life and fortune to the Pie!", imgURL: "https://static.wingify.com/vwo/uploads/sites/3/2011/05/dilbert-strip.gif", logoURL: "https://images-na.ssl-images-amazon.com/images/I/41lCbd6yFlL.jpg")
         comic10.fav = true
         
-        
         let comic1 = Comic(comicID: 1, comicName: "xkcd", comicNumber: 1100, episodeTitle: "Vows", episodeInfo: "So, um. Do you want to get a drink after the game?", imgURL: "https://imgs.xkcd.com/comics/vows.png", logoURL: "https://pbs.twimg.com/profile_images/2601531052/b7cct6s1npfvqmr87xyl_400x400.png")
         comic1.fav = true
         
@@ -82,7 +87,6 @@ class LibraryViewController: UIViewController {
         comic3.fav = true
         
         let comic4 = Comic(comicID: 1, comicName: "xkcd", comicNumber: 44, episodeTitle: "Love", episodeInfo: "This one makes me wince every time I think about it", imgURL: "https://imgs.xkcd.com/comics/love.jpg", logoURL: "https://pbs.twimg.com/profile_images/2601531052/b7cct6s1npfvqmr87xyl_400x400.png")
-        
         
         // Calvin and Hobbes
         let comic6 = Comic(comicID: 2, comicName: "Calvin and Hobbes", comicNumber: 1, episodeTitle: "Born to be wild", episodeInfo: "He'd be just as funny without all the Pooh jokes", imgURL: "https://www.blingyourband.com/media/catalog/product/cache/1/image/650x650/9df78eab33525d08d6e5fb8d27136e95/i/m/image_calvin-hobbes-baby-helmet-design_2.jpg", logoURL: "https://gartic.com.br/imgs/mural/iv/ivan_ferraro/calvin-e-haroldo.png")
@@ -93,9 +97,17 @@ class LibraryViewController: UIViewController {
         
         let comic8 = Comic(comicID: 2, comicName: "Calvin and Hobbes", comicNumber: 3, episodeTitle: "Stars", episodeInfo: "...", imgURL: "https://i0.wp.com/dogwithblog.in/wp-content/uploads/2010/08/calvin-hobbs-stars-1.jpg", logoURL: "https://gartic.com.br/imgs/mural/iv/ivan_ferraro/calvin-e-haroldo.png")
         
-        
         // Jerry Beck
         let comic20 = Comic(comicID: 9, comicName: "Jerry Beck", comicNumber: 1, episodeTitle: "Today’s Bizarro", episodeInfo: "He'd be just as funny without all the Pooh jokes", imgURL: "https://www.cartoonbrew.com/wp-content/uploads/bizarro4811.jpg", logoURL: "https://www.cartoonbrew.com/wp-content/themes/cartoon-brew/images/logo.png")
+        
+        comic0.episodeVote = 2
+        comic10.episodeVote = 15
+        comic1.episodeVote = 6
+        comic3.episodeVote = 77
+        comic6.episodeVote = 21
+        comic20.episodeVote = 22
+        comic8.episodeVote = 83
+        comic7.episodeVote = 102
         
         self.comics[0] = [comic0, comic10]
         self.comics[1] = [comic1, comic2, comic3, comic4]
@@ -201,6 +213,8 @@ class LibraryViewController: UIViewController {
         }
         completion?()
     }
+    
+    
 
 }
 
@@ -260,6 +274,13 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         self.lastSelectedCell = collectionView.cellForItem(at: indexPath)
+        
+        if lastSelectedCell == collectionView.cellForItem(at: indexPath) {
+            if let cell = lastSelectedCell as? ComicCollectionCell {
+                goToComicDetail(cell: cell)
+            }
+            
+        }
         // Set Selected Comic
         if withSections {
             let comics = self.comics[indexPath.section]
@@ -287,6 +308,16 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
             }
         }
         return UICollectionReusableView()
+    }
+    
+    func goToComicDetail(cell: ComicCollectionCell) {
+        if let libraryDetail = self.storyboard?.instantiateViewController(withIdentifier: "LibraryDetailVC") as? LibraryDetailVC {
+                if let comic = cell.comic {
+                    libraryDetail.initData(comic: comic)
+                    self.present(libraryDetail, animated: true)
+                }
+            
+        }
     }
     
 }

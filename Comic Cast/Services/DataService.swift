@@ -70,7 +70,7 @@ class DataService {
     }
     
     func post(userData: [String: Any]?, to user: User, completion: Completion? = nil) {
-        if let userUID = user.userID {
+        if let userUID = user.userUID {
             let REF = REF_USERS.child(userUID)
             if let userData = userData {
                 REF.updateChildValues(userData)
@@ -79,11 +79,10 @@ class DataService {
         completion?()
     }
     
-    func postTo(comic: Comic, completion: Completion? = nil) {
+    func post(comic: Comic, completion: Completion? = nil) {
         if let comicUID = comic.comicUID {
             let REF = REF_COMICS.child(comicUID).child("episode")
             if let episodeUID = comic.episodeUID {
-                
                 let userData: [String: Any] = [:
                     /*
                     
@@ -116,10 +115,10 @@ class DataService {
                             print("postImageToFirebase: Successfully uploaded image to Firebase storage")
                             storageREF.downloadURL { (url, err) in
                                 if let absoluteUrlString = url?.absoluteString {
-                                    if DataService.instance.REF_COMICS.child(comicUID).child("all").childByAutoId().key != nil {
+                                    if DataService.instance.REF_COMICS.child(comicUID).childByAutoId().key != nil {
                                         if let comic = comic {
                                             let newComic = Comic(comicID: comic.comicID, comicName: comic.comicName, comicNumber: comic.comicNumber, episodeTitle: comic.episodeTitle, episodeInfo: comic.episodeInfo, imgURL: absoluteUrlString, logoURL: comic.logoURL)
-                                            DataService.instance.postTo(comic: newComic)
+                                            DataService.instance.post(comic: newComic)
                                         }
                                         completion?()
                                     }
@@ -159,7 +158,6 @@ class DataService {
                                 if let absoluteUrlString = url?.absoluteString {
                                     if let user = user {
                                         let imageURL = absoluteUrlString
-                                        
                                         let userData: [String: Any] = [
                                             "imageURL" : imageURL
                                         ]

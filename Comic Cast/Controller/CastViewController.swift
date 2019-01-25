@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class CastViewController: UIViewController {
     
@@ -20,7 +21,9 @@ class CastViewController: UIViewController {
     
     // MARK: - Properties: Array & Varables
     // -------------------------------------
+    public var comicz = [Comic]()
     public var comics = [Comic]()
+    
     public var comicSelected = [Comic]()
     
     private var confirmationShowing = true
@@ -32,13 +35,36 @@ class CastViewController: UIViewController {
     
     private func testSetup() {
         // Dilbert
-        let comic0 = Comic(comicID: 0, comicName: "Dilbert", comicNumber: 1, episodeTitle: "Business Insider", episodeInfo: "That's Not How It Works.", imgURL: "https://static.businessinsider.com/image/525e97dfeab8ead530928bff/image.jpg", logoURL: "https://images-na.ssl-images-amazon.com/images/I/41lCbd6yFlL.jpg")
+        let comic0 = Comic(comicID: 0, comicName: "Dilbert", comicNumber: 1, comicTitle: "Business Insider", comicInfo: "That's Not How It Works.", imgURL: "https://static.businessinsider.com/image/525e97dfeab8ead530928bff/image.jpg", logoURL: "https://images-na.ssl-images-amazon.com/images/I/41lCbd6yFlL.jpg")
         
         // Calvin and Hobbes
-        let comic1 = Comic(comicID: 2, comicName: "Calvin and Hobbes", comicNumber: 1, episodeTitle: "Born to be wild", episodeInfo: "He'd be just as funny without all the Pooh jokes", imgURL: "https://www.blingyourband.com/media/catalog/product/cache/1/image/650x650/9df78eab33525d08d6e5fb8d27136e95/i/m/image_calvin-hobbes-baby-helmet-design_2.jpg", logoURL: "https://gartic.com.br/imgs/mural/iv/ivan_ferraro/calvin-e-haroldo.png")
+        let comic1 = Comic(comicID: 2, comicName: "Calvin and Hobbes", comicNumber: 1, comicTitle: "Born to be wild", comicInfo: "He'd be just as funny without all the Pooh jokes", imgURL: "https://www.blingyourband.com/media/catalog/product/cache/1/image/650x650/9df78eab33525d08d6e5fb8d27136e95/i/m/image_calvin-hobbes-baby-helmet-design_2.jpg", logoURL: "https://gartic.com.br/imgs/mural/iv/ivan_ferraro/calvin-e-haroldo.png")
         comic1.fav = true
         
-        self.comics.append(contentsOf: [comic0, comic1])
+        self.comicz.append(contentsOf: [comic0, comic1])
+    }
+    
+    // Observe Child Added
+    // -------------------
+    private func observeChildAdded() {
+        let comicsREF = DataService.instance.REF_COMICS
+        comicsREF.queryOrdered(byChild: "comicDate").observe(.childAdded, with: { (snapshot) in
+            if let snapValue = snapshot.value as? Dictionary<String, AnyObject> {
+                guard let comicUID = snapValue["comicUID"] as? String else { return }
+                guard let comicTitle = snapValue["comicTitle"] as? String else { return }
+                guard let comicInfo = snapValue["comicInfo"] as? String else { return }
+                guard let comicURL = snapValue["comicURL"] as? String else { return }
+                guard let comicDate = snapValue["comicDate"] as? String else { return }
+                guard let userURL = snapValue["userURL"] as? String else { return }
+                guard let userUID = snapValue["userUID"] as? String else { return }
+                guard let userName = snapValue["userName"] as? String else { return }
+                
+                let comic = Comic(comicUID: comicUID, comicNumber: nil, comicTitle: comicTitle, comicInfo: comicInfo, comicDate: comicDate, imgURL: comicURL, logoURL: userURL, userUID: userUID, userName: userName)
+                
+                self.comics.append(comic)
+                self.collectionView.reloadData()
+            }
+        })
     }
 
     override func viewDidLoad() {
@@ -50,8 +76,9 @@ class CastViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        collectionView.contentInset.top = 45
-        testSetup()
+        collectionView.contentInset.top = 50
+        
+        observeChildAdded()
     }
 
     private func enterAddComicView() {
@@ -59,7 +86,7 @@ class CastViewController: UIViewController {
         let visualView = UIVisualEffectView(frame: UIScreen.main.bounds)
         self.view.addSubview(visualView)
         
-        let staticFrame = CGRect(x: 10, y: 60, width: 354, height: 442)
+        let staticFrame = CGRect(x: 22.5, y: 50, width: 330, height: 342)
         let comicView = AddComic(frame: staticFrame)
         comicView.pickerImage = getImageFromPicker
         

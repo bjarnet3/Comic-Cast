@@ -10,20 +10,35 @@ import UIKit
 
 class LibraryDetailVC: UIViewController {
     
-    @IBOutlet weak var backgroundImageView: UIImageView!
+    @IBOutlet weak var detailImageView: UIImageView!
+    @IBOutlet weak var detailNameLbl: UILabel!
+    @IBOutlet weak var detailTitleLbl: UILabel!
+    @IBOutlet weak var detailAltLbl: UILabel!
+    @IBOutlet weak var detailVote: UILabel!
+    @IBOutlet weak var detailFav: UIButton!
+    
     @IBAction func backAction(_ sender: Any) {
         dismiss(animated: true, completion: {
             print("dismiss complete")
         })
     }
+    @IBAction func setFavorite(_ sender: Any) {
+        self.favorite = !self.favorite
+    }
     
-    var comic: Comic?
-    var urlString: String?
+    public var comic: Comic?
+    private var favorite = false {
+        didSet {
+            let color = favorite == true ? UIColor.red : UIColor.lightGray
+            self.detailFav.alpha = favorite == true ? 0.9 : 0.7
+            self.detailFav.titleLabel?.textColor = color
+            self.detailFav.setTitleColor(color, for: .normal)
+            self.comic?.fav = favorite
+        }
+    }
     
     func initData(comic: Comic) {
         self.comic = comic
-        guard let imageURL = comic.imgURL else { return }
-        
     }
     
     // MARK: - ViewDidLoad, ViewWillLoad etc...
@@ -31,7 +46,21 @@ class LibraryDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        backgroundImageView.loadImageUsingCacheWith(urlString: (comic?.imgURL)!)
+        if let comic = self.comic {
+            guard let comicUrl = comic.comicURL else { return }
+            detailImageView.loadImageUsingCacheWith(urlString: (comicUrl))
+            guard let comicName = comic.comicName else { return }
+            self.detailNameLbl.text = comicName
+            guard let comicTitle = comic.comicTitle else { return }
+            self.detailTitleLbl.text = comicTitle
+            guard let comicInfo = comic.comicInfo else { return }
+            self.detailAltLbl.text = comicInfo
+            let episodeVote = comic.comicVote
+            self.detailVote.text = String(episodeVote)
+            favorite = comic.fav
+        }
+        
+        
     }
     
     

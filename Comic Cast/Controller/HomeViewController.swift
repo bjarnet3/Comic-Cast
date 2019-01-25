@@ -19,14 +19,17 @@ class HomeViewController: UIViewController {
     // MARK: - IBOutlet: Connection to View "storyboard"
     // -------------------------------------------------
     @IBOutlet weak var registerView: FrostyCornerView!
-    @IBOutlet weak var loginView: FrostyCornerView!
+    @IBOutlet weak var registerUsername: UXTextField!
+    @IBOutlet weak var registerPassword: UXTextField!
+    @IBOutlet weak var registerImage: UIImageView!
+    @IBOutlet weak var registerName: UXTextField!
+    @IBOutlet weak var registerAge: UXTextField!
+    @IBOutlet weak var registerGender: UXTextField!
     
-    @IBOutlet weak var loginUserName: UXTextField!
-    @IBOutlet weak var loginPassWord: UXTextField!
-    @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var profileName: UXTextField!
-    @IBOutlet weak var profileAge: UXTextField!
-    @IBOutlet weak var profileGender: UXTextField!
+    @IBOutlet weak var loginImage: UIImageView!
+    @IBOutlet weak var loginView: FrostyCornerView!
+    @IBOutlet weak var loginUsername: UXTextField!
+    @IBOutlet weak var loginPassword: UXTextField!
     
     @IBOutlet weak var batMessageView: FrostyCornerView!
     @IBOutlet weak var batMessage: UILabel!
@@ -36,9 +39,9 @@ class HomeViewController: UIViewController {
     
     // MARK: - Properties: Array & Varables
     // -------------------------------------
-    private var batMessageShowing = true
-    private var loginViewShowing = true
     private var registerViewShowing = false
+    private var loginViewShowing = true
+    private var batMessageShowing = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,21 +72,27 @@ class HomeViewController: UIViewController {
     
     func setupLogin() {
         self.exitLoginView()
-        self.profileImage.layer.cornerRadius = 18.0
+        self.registerImage.layer.cornerRadius = 18.0
+    }
+    
+    func nextTextFieldFocus() {
+        
     }
     
     // Calls this function when the tap is recognized.
     func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true)
+        // Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true) // Not recommanded,,, user resign first responder instead
     }
     
     // MARK: - IBAction: Methods connected to UI
     // -----------------------------------------
     @IBAction func signInAction(_ sender: Any) {
         emailLogin()
+        exitLoginView()
     }
     
+    // FIXME: - NOT IN USE YET...
     @IBAction func signOutAction(_ sender: Any) {
         AuthService.instance.signOut()
     }
@@ -105,6 +114,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func batMessageAlertAction(_ sender: Any) {
+        self.batMessage.text = "[Bat Text Message System ©]  -This is a test,,, PHECCKk..."
         self.batAlertMessage()
     }
     
@@ -126,15 +136,25 @@ class HomeViewController: UIViewController {
         }
     }
     
-    @IBAction func resignKeyboard(_ sender: Any) {
-        dismissKeyboard()
+    // Next Button in Keyboard
+    // -----------------------
+    @IBAction func resignKeyboard(_ sender: UXTextField) {
+        let textFields = [self.registerName, self.registerAge, self.registerGender, self.registerUsername, self.registerPassword]
+        for (idx, textField) in textFields.enumerated() {
+            if textField == sender {
+                textField?.resignFirstResponder()
+                if let nextTextField = textFields[idx+1] {
+                    nextTextField.becomeFirstResponder()
+                }
+            }
+        }
     }
 
     // MARK: - EMAIL AUTHENTICATION & EMAIL REGISTER
     // ---------------------------------------------
     func emailLogin() {
         dismissKeyboard()
-        if let email = self.loginUserName.text, let pwd = self.loginPassWord.text {
+        if let email = self.loginUsername.text, let pwd = self.loginPassword.text {
             Auth.auth().signIn(withEmail: email, password: pwd, completion: { (auth, error) in
                 if error == nil {
                     let authMessage = "PRINT: Email user authenticated with Firebase"
@@ -143,8 +163,23 @@ class HomeViewController: UIViewController {
                     
                     if let userUID = auth?.user.uid {
                         let user = User(userUID: userUID, userName: email, userPass: pwd)
+                        
                         AuthService.instance.setUser(user: user)
                         AuthService.instance.signIn(with: userUID)
+                        
+                        self.getUserImage(from: user)
+                        
+                        /*
+                        DataService.instance.REF_USER_CURRENT.child("imageURL").observe(.value, with: { (snapshot) in
+                            if let imageURL = snapshot.value as? String {
+                                self.loginImage.loadImageUsingCacheWith(urlString: imageURL, completion: {
+                                    user.imageURL = imageURL
+                                    self.exitAllView()
+                                })
+                            }
+                        })
+                        */
+                        
                         // let name = "Bjarne"
                         // 1. Get info from database, and load to labels and buttons
                         // 2. Run login "Animations"
@@ -167,7 +202,7 @@ class HomeViewController: UIViewController {
     
     func emailRegister() {
         dismissKeyboard()
-        if let email = self.loginUserName.text, let pwd = self.loginPassWord.text {
+        if let email = self.registerUsername.text, let pwd = self.registerPassword.text {
             Auth.auth().createUser(withEmail: email, password: pwd, completion: { (auth, error) in
                 if error != nil {
                     let authMessage = "PRINT: Unable to Login with Error \(String(describing: error))"
@@ -181,20 +216,21 @@ class HomeViewController: UIViewController {
                     if let userUID = auth?.user.uid {
                         let user = User(userUID: userUID, userName: email, userPass: pwd)
                         hapticButton(.success)
-                        let authMessage = "PRINT: Email login success"
+                        let authMessage = "PRINT: Email register success"
                         print(authMessage)
                         AuthService.instance.authMessage = authMessage
+                        AuthService.instance.setUser(user: user)
                         AuthService.instance.signIn(with: userUID)
                         
                         self.batMessage.text = authMessage
                         let userData = [
                             "userUID": userUID,
                             "userEmail": email,
-                            "userName" : self.profileName.text ?? "unknown",
-                            "userAge": self.profileAge.text ?? "unknown",
-                            "userGender": self.profileGender.text ?? "no gender"
+                            "userName" : self.registerName.text ?? "unknown",
+                            "userAge": self.registerAge.text ?? "unknown",
+                            "userGender": self.registerGender.text ?? "no gender"
                             ]
-                        let profileImage = self.profileImage.image
+                        let profileImage = self.registerImage.image
                         self.completeRegister(user: user, userData: userData, userImage: profileImage)
                     }
                 }
@@ -209,9 +245,23 @@ class HomeViewController: UIViewController {
             if let profileImage = userImage {
                 DataService.instance.post(image: profileImage, to: user, completion: {
                     printDebug(object: "SUCCESS")
+                    self.getUserImage(from: user)
                 })
             }
         }
+    }
+    
+    func getUserImage(from user: User) {
+        DataService.instance.REF_USER_CURRENT.child("imageURL").observe(.value, with: { (snapshot) in
+            if let imageURL = snapshot.value as? String {
+                self.loginImage.loadImageUsingCacheWith(urlString: imageURL, completion: {
+                    user.imageURL = imageURL
+                    
+                    AuthService.instance.setUser(user: user)
+                    self.exitAllView()
+                })
+            }
+        })
     }
     
 }
@@ -332,10 +382,21 @@ extension HomeViewController: UINavigationControllerDelegate, UIImagePickerContr
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            self.profileImage.image = image
+            self.registerImage.image = image
             // self.postImageToFirebase(image: image)
         }
         self.dismiss(animated: true, completion: nil)
     }
 }
 
+// MARK: - UIScrollView, Delegate
+// ------------------------------
+extension HomeViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == self.backgroundScrollView {
+            print(scrollView.contentOffset.y)
+        }
+    }
+    
+}

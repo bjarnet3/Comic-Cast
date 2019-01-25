@@ -26,7 +26,7 @@ class SettingsViewController: UIViewController {
         self.settings = LocalService.instance.getSettings()
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        self.tableView.contentInset.top = 45
+        self.tableView.contentInset.top = 50
     }
 }
 

@@ -25,15 +25,11 @@ class ComicCollectionHeader: UICollectionReusableView {
     }
     
     public func loadSectionHeader(comic: Comic) {
-        if let urlString = comic.logoURL {
-            if !comic.local {
-                self.comicLogoImage.loadImageUsingCacheWith(urlString: urlString)
-            } else {
-                self.comicLogoImage.image = UIImage(named: urlString)
-            }
+        if let urlString = comic.userURL {
+            self.comicLogoImage.loadImageUsingCacheWith(urlString: urlString)
         }
         self.comicNameLbl.text = comic.comicName ?? "No Title"
-        self.comicDescLbl.text = comic.imgURL ?? "No Alt Message"
+        self.comicDescLbl.text = comic.comicURL ?? "No Alt Message"
     }
     
 }

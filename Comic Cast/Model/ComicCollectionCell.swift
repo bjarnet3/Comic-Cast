@@ -134,8 +134,8 @@ class ComicCollectionCell: UICollectionViewCell {
     
     public func loadCell(comic: Comic, animated: Bool = true) {
         self.cellImageLoaded = false
-        if let urlString = comic.imgURL {
-            if !comic.local && animated {
+        if let urlString = comic.comicURL {
+            if animated {
                 
                 self.animateView(direction: .enter)
                 let random = Double(arc4random_uniform(UInt32(900))) / 4200
@@ -146,9 +146,9 @@ class ComicCollectionCell: UICollectionViewCell {
                         
                         self.comic = comic
                         self.favorite = comic.fav
-                        let title = comic.episodeTitle ?? "No Title"
-                        let info = comic.episodeInfo ?? "No Info"
-                        let votes = comic.episodeVote
+                        let title = comic.comicTitle ?? "No Title"
+                        let info = comic.comicInfo ?? "No Info"
+                        let votes = comic.comicVote
                         self.comicTitleLbl.text = "  \(title)"
                         self.comicAltLbl.text = "   \(info)"
                         self.episodeVote.text = String(votes)
@@ -158,9 +158,9 @@ class ComicCollectionCell: UICollectionViewCell {
                 self.comicImageView.image = UIImage(named: urlString)
                 self.comic = comic
                 self.favorite = comic.fav
-                self.comicTitleLbl.text = comic.episodeTitle ?? "No Comic Title"
-                self.comicAltLbl.text = comic.episodeInfo ?? "No Alt Text"
-                self.episodeVote.text = String(comic.episodeVote)
+                self.comicTitleLbl.text = comic.comicTitle ?? "No Comic Title"
+                self.comicAltLbl.text = comic.comicInfo ?? "No Alt Text"
+                self.episodeVote.text = String(comic.comicVote)
             }
             self.cellImageLoaded = true
         }

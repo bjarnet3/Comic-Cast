@@ -22,6 +22,7 @@ class LibraryViewController: UIViewController {
     }
     
     @IBAction func sortedBy(_ sender: UISegmentedControl) {
+        self.exitOptions()
         self.withSections = sender.selectedSegmentIndex == 0 ? true : false
         if sender.selectedSegmentIndex == 0 {
             // animate(out: self.collectionView)
@@ -30,11 +31,32 @@ class LibraryViewController: UIViewController {
         }
     }
     
-    @IBAction func showDetailAction(_ sender: Any) {
+    @IBAction func detailAction(_ sender: Any) {
+        self.exitOptions()
         if let lastCell = lastSelectedCell as? ComicCollectionCell {
             goToComicDetail(cell: lastCell)
         }
     }
+    
+    @IBAction func shareAction(_ sender: Any) {
+        exitOptions()
+        if let lastCell = lastSelectedCell as? ComicCollectionCell {
+            /*
+            if let linkURL = lastCell.comic?.comicURL {
+                UIPasteboard.general.string = linkURL
+            }
+            */
+            if let image = lastCell.comicImageView.image {
+                UIPasteboard.general.image = image
+            }
+        }
+    }
+    
+    @IBAction func exitOptionsAction(_ sender: Any) {
+        exitOptions()
+    }
+    
+    
     
     // MARK: - Properties: Array & Varables
     // -------------------------------------
@@ -44,7 +66,9 @@ class LibraryViewController: UIViewController {
     
     private var comicView: AddComic?
     private var animator: UIViewPropertyAnimator?
+    
     private var lastSelectedCell: UICollectionViewCell?
+    private var lastScrollOffset: CGFloat = 0.0
     
     private var confirmationShowing = true
     private var withSections = true {
@@ -60,54 +84,55 @@ class LibraryViewController: UIViewController {
         super.viewDidLoad()
         
         exitAddComicView()
-        exitConfirmation()
+        exitOptions()
         
         segmentSetup()
         comicsSetup()
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.contentInset.top = 45
+        collectionView.contentInset.top = 50
     }
     
     // MARK: - Functions: Animations & Views
     // ----------------------------------------
     private func comicsSetup() {
         // Dilbert
-        let comic0 = Comic(comicID: 0, comicName: "Dilbert", comicNumber: 1, episodeTitle: "Business Insider", episodeInfo: "That's Not How It Works.", imgURL: "https://static.businessinsider.com/image/525e97dfeab8ead530928bff/image.jpg", logoURL: "https://images-na.ssl-images-amazon.com/images/I/41lCbd6yFlL.jpg")
+        let comic0 = Comic(comicID: 0, comicName: "Dilbert", comicNumber: 1, comicTitle: "Business Insider", comicInfo: "That's Not How It Works.", imgURL: "https://static.businessinsider.com/image/525e97dfeab8ead530928bff/image.jpg", logoURL: "https://images-na.ssl-images-amazon.com/images/I/41lCbd6yFlL.jpg")
         
-        let comic10 = Comic(comicID: 0, comicName: "Dilbert", comicNumber: 2, episodeTitle: "Pie Chart", episodeInfo: "I pledge my life and fortune to the Pie!", imgURL: "https://static.wingify.com/vwo/uploads/sites/3/2011/05/dilbert-strip.gif", logoURL: "https://images-na.ssl-images-amazon.com/images/I/41lCbd6yFlL.jpg")
+        let comic10 = Comic(comicID: 0, comicName: "Dilbert", comicNumber: 2, comicTitle: "Pie Chart", comicInfo: "I pledge my life and fortune to the Pie!", imgURL: "https://static.wingify.com/vwo/uploads/sites/3/2011/05/dilbert-strip.gif", logoURL: "https://images-na.ssl-images-amazon.com/images/I/41lCbd6yFlL.jpg")
         comic10.fav = true
         
-        let comic1 = Comic(comicID: 1, comicName: "xkcd", comicNumber: 1100, episodeTitle: "Vows", episodeInfo: "So, um. Do you want to get a drink after the game?", imgURL: "https://imgs.xkcd.com/comics/vows.png", logoURL: "https://pbs.twimg.com/profile_images/2601531052/b7cct6s1npfvqmr87xyl_400x400.png")
+        let comic1 = Comic(comicID: 1, comicName: "xkcd", comicNumber: 1100, comicTitle: "Vows", comicInfo: "So, um. Do you want to get a drink after the game?", imgURL: "https://imgs.xkcd.com/comics/vows.png", logoURL: "https://pbs.twimg.com/profile_images/2601531052/b7cct6s1npfvqmr87xyl_400x400.png")
         comic1.fav = true
         
-        let comic2 = Comic(comicID: 1, comicName: "xkcd", comicNumber: 1320, episodeTitle: "Walmart", episodeInfo: "What I really want is to hang out where I hung out with my friends in college, but have all my older relatives there too.", imgURL: "https://imgs.xkcd.com/comics/walmart.png", logoURL: "http://cdn.embed.ly/providers/logos/xkcd.png")
-        let comic3 = Comic(comicID: 1, comicName: "xkcd", comicNumber: 803, episodeTitle: "Airfoil", episodeInfo: "This is a fun explanation to prepare your kids for; it's common and totally wrong. Good lines include 'why does the air have to travel on both sides at the same time?' and 'I saw the Wright brothers plane and those wings were curved the same on the top and bottom!'", imgURL: "https://imgs.xkcd.com/comics/airfoil.png", logoURL: "http://cdn.embed.ly/providers/logos/xkcd.png")
+        let comic2 = Comic(comicID: 1, comicName: "xkcd", comicNumber: 1320, comicTitle: "Walmart", comicInfo: "What I really want is to hang out where I hung out with my friends in college, but have all my older relatives there too.", imgURL: "https://imgs.xkcd.com/comics/walmart.png", logoURL: "http://cdn.embed.ly/providers/logos/xkcd.png")
+        
+        let comic3 = Comic(comicID: 1, comicName: "xkcd", comicNumber: 803, comicTitle: "Airfoil", comicInfo: "This is a fun explanation to prepare your kids for; it's common and totally wrong. Good lines include 'why does the air have to travel on both sides at the same time?' and 'I saw the Wright brothers plane and those wings were curved the same on the top and bottom!'", imgURL: "https://imgs.xkcd.com/comics/airfoil.png", logoURL: "http://cdn.embed.ly/providers/logos/xkcd.png")
         comic3.fav = true
         
-        let comic4 = Comic(comicID: 1, comicName: "xkcd", comicNumber: 44, episodeTitle: "Love", episodeInfo: "This one makes me wince every time I think about it", imgURL: "https://imgs.xkcd.com/comics/love.jpg", logoURL: "https://pbs.twimg.com/profile_images/2601531052/b7cct6s1npfvqmr87xyl_400x400.png")
+        let comic4 = Comic(comicID: 1, comicName: "xkcd", comicNumber: 44, comicTitle: "Love", comicInfo: "This one makes me wince every time I think about it", imgURL: "https://imgs.xkcd.com/comics/love.jpg", logoURL: "https://pbs.twimg.com/profile_images/2601531052/b7cct6s1npfvqmr87xyl_400x400.png")
         
         // Calvin and Hobbes
-        let comic6 = Comic(comicID: 2, comicName: "Calvin and Hobbes", comicNumber: 1, episodeTitle: "Born to be wild", episodeInfo: "He'd be just as funny without all the Pooh jokes", imgURL: "https://www.blingyourband.com/media/catalog/product/cache/1/image/650x650/9df78eab33525d08d6e5fb8d27136e95/i/m/image_calvin-hobbes-baby-helmet-design_2.jpg", logoURL: "https://gartic.com.br/imgs/mural/iv/ivan_ferraro/calvin-e-haroldo.png")
+        let comic6 = Comic(comicID: 2, comicName: "Calvin and Hobbes", comicNumber: 1, comicTitle: "Born to be wild", comicInfo: "He'd be just as funny without all the Pooh jokes", imgURL: "https://www.blingyourband.com/media/catalog/product/cache/1/image/650x650/9df78eab33525d08d6e5fb8d27136e95/i/m/image_calvin-hobbes-baby-helmet-design_2.jpg", logoURL: "https://gartic.com.br/imgs/mural/iv/ivan_ferraro/calvin-e-haroldo.png")
         comic6.fav = true
         
-        let comic7 = Comic(comicID: 2, comicName: "Calvin and Hobbes", comicNumber: 2, episodeTitle: "The dead bird", episodeInfo: "What to say about this one…sheer poetry. Did anybody say philosophy?", imgURL: "https://calvy.files.wordpress.com/2010/08/dead-bird.jpg", logoURL: "https://gartic.com.br/imgs/mural/iv/ivan_ferraro/calvin-e-haroldo.png")
+        let comic7 = Comic(comicID: 2, comicName: "Calvin and Hobbes", comicNumber: 2, comicTitle: "The dead bird", comicInfo: "What to say about this one…sheer poetry. Did anybody say philosophy?", imgURL: "https://calvy.files.wordpress.com/2010/08/dead-bird.jpg", logoURL: "https://gartic.com.br/imgs/mural/iv/ivan_ferraro/calvin-e-haroldo.png")
         comic7.fav = true
         
-        let comic8 = Comic(comicID: 2, comicName: "Calvin and Hobbes", comicNumber: 3, episodeTitle: "Stars", episodeInfo: "...", imgURL: "https://i0.wp.com/dogwithblog.in/wp-content/uploads/2010/08/calvin-hobbs-stars-1.jpg", logoURL: "https://gartic.com.br/imgs/mural/iv/ivan_ferraro/calvin-e-haroldo.png")
+        let comic8 = Comic(comicID: 2, comicName: "Calvin and Hobbes", comicNumber: 3, comicTitle: "Stars", comicInfo: "...", imgURL: "https://i0.wp.com/dogwithblog.in/wp-content/uploads/2010/08/calvin-hobbs-stars-1.jpg", logoURL: "https://gartic.com.br/imgs/mural/iv/ivan_ferraro/calvin-e-haroldo.png")
         
         // Jerry Beck
-        let comic20 = Comic(comicID: 9, comicName: "Jerry Beck", comicNumber: 1, episodeTitle: "Today’s Bizarro", episodeInfo: "He'd be just as funny without all the Pooh jokes", imgURL: "https://www.cartoonbrew.com/wp-content/uploads/bizarro4811.jpg", logoURL: "https://www.cartoonbrew.com/wp-content/themes/cartoon-brew/images/logo.png")
+        let comic20 = Comic(comicID: 9, comicName: "Jerry Beck", comicNumber: 1, comicTitle: "Today’s Bizarro", comicInfo: "He'd be just as funny without all the Pooh jokes", imgURL: "https://www.cartoonbrew.com/wp-content/uploads/bizarro4811.jpg", logoURL: "https://www.cartoonbrew.com/wp-content/themes/cartoon-brew/images/logo.png")
         
-        comic0.episodeVote = 2
-        comic10.episodeVote = 15
-        comic1.episodeVote = 6
-        comic3.episodeVote = 77
-        comic6.episodeVote = 21
-        comic20.episodeVote = 22
-        comic8.episodeVote = 83
-        comic7.episodeVote = 102
+        comic0.comicVote = 2
+        comic10.comicVote = 15
+        comic1.comicVote = 6
+        comic3.comicVote = 77
+        comic6.comicVote = 21
+        comic20.comicVote = 22
+        comic8.comicVote = 83
+        comic7.comicVote = 102
         
         self.comics[0] = [comic0, comic10]
         self.comics[1] = [comic1, comic2, comic3, comic4]
@@ -270,17 +295,10 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
         return UICollectionViewCell()
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: true)
+        printFunc()
         self.lastSelectedCell = collectionView.cellForItem(at: indexPath)
-        
-        if lastSelectedCell == collectionView.cellForItem(at: indexPath) {
-            if let cell = lastSelectedCell as? ComicCollectionCell {
-                goToComicDetail(cell: cell)
-            }
-            
-        }
+        enterOptions()
         // Set Selected Comic
         if withSections {
             let comics = self.comics[indexPath.section]
@@ -289,9 +307,17 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
             }
         } else {
             let comics = self.comicsByDate[indexPath.row]
-            print(comics.episodeTitle)
+            print(comics.comicTitle)
         }
-        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        printFunc()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        printFunc()
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -323,24 +349,24 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
 }
 
 extension LibraryViewController {
-    func enterConfirmation() {
+    func enterOptions() {
         if !confirmationShowing {
             UIView.animate(withDuration: 0.56, delay: 0.00, usingSpringWithDamping: 0.68, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
                 self.confirmationView.alpha = 1.0
                 self.confirmationView.isUserInteractionEnabled = true
-                self.confirmationView.transform = CGAffineTransform(translationX: 0, y: -15.0)
+                self.confirmationView.transform = CGAffineTransform(translationX: 0, y: -12.8)
                 self.confirmationShowing = true
             })
         }
         
     }
     
-    func exitConfirmation() {
+    func exitOptions() {
         if confirmationShowing {
             UIView.animate(withDuration: 0.55, delay: 0.02, usingSpringWithDamping: 0.67, initialSpringVelocity: 0.31, options: .curveEaseOut, animations: {
                 self.confirmationView.alpha = 0.0
                 self.confirmationView.isUserInteractionEnabled = false
-                self.confirmationView.transform = CGAffineTransform(translationX: 0, y: 15.0)
+                self.confirmationView.transform = CGAffineTransform(translationX: 0, y: 12.8)
                 self.confirmationShowing = false
             })
         }
@@ -350,8 +376,19 @@ extension LibraryViewController {
 // MARK: - UIScrollView, Delegate
 // ------------------------------
 extension LibraryViewController: UIScrollViewDelegate {
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // print(scrollView.contentOffset)
+        if lastScrollOffset > scrollView.contentOffset.y + 30.0 {
+            saveLastScrollOffset(scrollView)
+        } else if lastScrollOffset < scrollView.contentOffset.y - 30.0{
+            saveLastScrollOffset(scrollView)
+        }
     }
+    
+    func saveLastScrollOffset(_ scrollView: UIScrollView) {
+        self.lastScrollOffset = scrollView.contentOffset.y
+        exitOptions()
+    }
+
 }
 

@@ -55,12 +55,24 @@ class AddComic: UIView {
     public func uploadRequest(completion: Completion? = nil) {
         setProgress(progress: 1.0, animated: true, alpha: 1.0, delay: 0.05, duration: 4.2, completion: nil)
         if let image = self.comicImageView.image {
-            let comic = Comic(comicID: 0, comicName: "", comicNumber: 99, episodeTitle: comicTitleTextField.text ?? "", episodeInfo: comicAltTextField.text ?? "", imgURL: "", logoURL: "")
-            DataService.instance.post(image: image, to: comic, completion: {
-                self.setProgress(progress: 0.0, animated: true, alpha: 0.0, delay: 0.0, duration: 5.2, completion: {
-                    completion?()
-                })
-            })
+            
+            if let user = AuthService.instance.getUser() {
+                if let comicUID = DataService.instance.REF_COMICS.childByAutoId().key {
+                    /*
+                    let comic = Comic(comicUID: comicUID, comicNumber: user.comics?.count ?? 0, comicTitle: comicTitleTextField.text ?? "", comicInfo: comicAltTextField.text ?? "", imgURL: "", logoURL: user.imageURL, userUID: user.userUID, userName: user.userName)
+ 
+                    */
+                    let dateString = dateToString()
+                    let comic = Comic(comicUID: comicUID, comicNumber: user.comics?.count ?? 0, comicTitle: comicTitleTextField.text ?? "", comicInfo: comicAltTextField.text ?? "", comicDate: dateString, imgURL: "", logoURL: user.imageURL, userUID: user.userUID, userName: user.userName)
+                    
+                    DataService.instance.new(comic: comic, with: image, completion: {
+                        self.setProgress(progress: 0.0, animated: true, alpha: 0.0, delay: 0.0, duration: 5.2, completion: {
+                            self.completion?()
+                        })
+                    })
+                }
+            }
+            
         } else {
             self.pickerImage?()
             setProgress(progress: 0.0, animated: true, alpha: 0.0, delay: 0.0, duration: 4.2, completion: {
@@ -133,7 +145,7 @@ class AddComic: UIView {
     
     // Initialize Data
     public func initData(comic: Comic?, completion: Completion? = nil) {
-        if let comic = comic?.episodeTitle {
+        if let comic = comic?.comicTitle {
             print(comic)
         }
         self.completion = completion

@@ -63,6 +63,39 @@ public func dateTimeToString(from date: Date, with locale:String = "nb_NO", date
     return dateTimeToString
 }
 
+
+/**
+ Argument String in format **MM/dd/yyyy** and returns a Date
+ - example: **stringToDate("12/31/2017")**
+ 
+ - Parameter dateString: **MM/dd/yyyy**
+ - Returns: **Date**
+ */
+public func stringToDate(_ date: String) -> Date {
+    let dateFormater = DateFormatter()
+    dateFormater.dateFormat = "yyyy-MM-dd-HH:mm:ss"
+    
+    let stringToDateFormat = dateFormater.date(from: date)
+    return stringToDateFormat!
+}
+
+/**
+ - DateFormat = "yyyy-MM-dd-HH:mm:ss"
+
+ - Parameter date:
+ - Returns: **String**
+ 
+ - Returns: **yyyy-MM-dd-HH:mm:ss** ex: (**2017-12-31-17:40:59**)
+ */
+public func dateToString(_ date: Date? = nil) -> String {
+    let date = date ?? Date()
+    let dateFormater = DateFormatter()
+    dateFormater.dateFormat = "yyyy-MM-dd-HH:mm:ss"
+    
+    return dateFormater.string(from: date)
+}
+
+
 /// argument **String** of **#HEX** returns **UIColor** value
 public func hexStringToUIColor (_ hex:String, _ alpha: Float? = 1.0) -> UIColor {
     var cString:String = hex.trimmingCharacters(in: (NSCharacterSet.whitespacesAndNewlines as NSCharacterSet) as CharacterSet).uppercased()

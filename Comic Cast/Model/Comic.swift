@@ -11,41 +11,55 @@ import Foundation
 // Comic is the Primary Object
 // ---------------------------
 class Comic {
-    var comicID: Int
+    var comicID: Int?
     var comicUID: String?
-    var comicName: String?
     var comicNumber: Int?
-    
-    var seasonID: Int?
-    var seasonTitle: String?
-    
-    var episodeID: Int?
-    var episodeUID: String?
-    var episodeTitle: String?
-    var episodeInfo: String?
-    var episodeVote: Int = 0
-    
-    var day: String?
-    var month: String?
-    var year: String?
-    
-    var link: String?
-    var news: String?
+    var comicName: String?
 
-    var local: Bool = false
+    var comicTitle: String?
+    var comicInfo: String?
+    var comicVote: Int = 0
+    var comicURL: String?
+    var comicDate: String?
+
+    var userURL: String?
+    var userUID: String?
+    var userName: String?
+    
     var fav: Bool = false
     
-    var imgURL: String?
-    var logoURL: String?
-    
-    init(comicID: Int, comicName: String?, comicNumber: Int?, episodeTitle: String?, episodeInfo: String?, imgURL: String?, logoURL: String?) {
+    init(comicID: Int, comicName: String?, comicNumber: Int?, comicTitle: String?, comicInfo: String?, imgURL: String?, logoURL: String?) {
         self.comicID = comicID
         self.comicName = comicName
         self.comicNumber = comicNumber
-        self.episodeTitle = episodeTitle
-        self.episodeInfo = episodeInfo
-        self.imgURL = imgURL
-        self.logoURL = logoURL
+        self.comicTitle = comicTitle
+        self.comicInfo = comicInfo
+        self.comicURL = imgURL
+        self.userURL = logoURL
     }
+    
+    init(comicUID: String?, comicNumber: Int?, comicTitle: String?, comicInfo: String?, imgURL: String?, logoURL: String?, userUID: String?, userName: String?) {
+        self.comicUID = comicUID
+        self.comicNumber = comicNumber
+        self.comicTitle = comicTitle
+        self.comicInfo = comicInfo
+        self.comicURL = imgURL
+        self.userURL = logoURL
+        self.userUID = userUID
+        self.userName = userName
+    }
+    
+    init(comicUID: String?, comicNumber: Int?, comicTitle: String?, comicInfo: String?, comicDate: String?, imgURL: String?, logoURL: String?, userUID: String?, userName: String?) {
+        self.comicUID = comicUID
+        self.comicNumber = comicNumber
+        self.comicTitle = comicTitle
+        self.comicInfo = comicInfo
+        self.comicURL = imgURL
+        self.comicDate = comicDate
+        self.userURL = logoURL
+        self.userUID = userUID
+        self.userName = userName
+    }
+    
     
 }

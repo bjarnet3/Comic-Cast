@@ -66,6 +66,7 @@ class FrostyCornerView: FrostyView {
     }
 }
 
+// Custom TabBar subclass
 class FrostyTabBar: UITabBar {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -73,6 +74,7 @@ class FrostyTabBar: UITabBar {
     }
 }
 
+// Custom TabBar Frost Effect
 extension FrostyTabBar {
     func setEffect(blurEffect: UIBlurEffect.Style = .extraLight) {
         for view in subviews {

@@ -50,7 +50,7 @@ class HomeViewController: UIViewController {
         setupBatMessage()
     }
     
-    func setupBatMessage() {
+    private func setupBatMessage() {
         self.exitBatMessage()
         /*
         self.batMessageClose.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
@@ -59,7 +59,7 @@ class HomeViewController: UIViewController {
         self.batMessageView.layer.cornerRadius = self.batMessageView.frame.height / 2
     }
     
-    func setupScrollView() {
+    private func setupScrollView() {
         if let image = UIImage(named: "U0Y2pqS") {
             // let patternImage = UIColor(patternImage: image)
             let imageView = UIImageView(image: image)
@@ -70,17 +70,13 @@ class HomeViewController: UIViewController {
         }
     }
     
-    func setupLogin() {
+    private func setupLogin() {
         self.exitLoginView()
         self.registerImage.layer.cornerRadius = 18.0
     }
     
-    func nextTextFieldFocus() {
-        
-    }
-    
     // Calls this function when the tap is recognized.
-    func dismissKeyboard() {
+    private func dismissKeyboard() {
         // Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true) // Not recommanded,,, user resign first responder instead
     }
@@ -152,14 +148,13 @@ class HomeViewController: UIViewController {
 
     // MARK: - EMAIL AUTHENTICATION & EMAIL REGISTER
     // ---------------------------------------------
-    func emailLogin() {
+    private func emailLogin() {
         dismissKeyboard()
         if let email = self.loginUsername.text, let pwd = self.loginPassword.text {
             Auth.auth().signIn(withEmail: email, password: pwd, completion: { (auth, error) in
                 if error == nil {
-                    let authMessage = "PRINT: Email user authenticated with Firebase"
+                    let authMessage = "Email user authenticated with Firebase"
                     AuthService.instance.authMessage = authMessage
-                    self.enterBatMessage()
                     
                     if let userUID = auth?.user.uid {
                         let user = User(userUID: userUID, userName: email, userPass: pwd)
@@ -169,24 +164,8 @@ class HomeViewController: UIViewController {
                         
                         self.getUserImage(from: user)
                         
-                        /*
-                        DataService.instance.REF_USER_CURRENT.child("imageURL").observe(.value, with: { (snapshot) in
-                            if let imageURL = snapshot.value as? String {
-                                self.loginImage.loadImageUsingCacheWith(urlString: imageURL, completion: {
-                                    user.imageURL = imageURL
-                                    self.exitAllView()
-                                })
-                            }
-                        })
-                        */
-                        
-                        // let name = "Bjarne"
-                        // 1. Get info from database, and load to labels and buttons
-                        // 2. Run login "Animations"
-                        // 3. Show signOutViw
-                        
                         self.batMessage.text = authMessage
-                        self.batAlertMessage()
+                        self.batAlertMessage(delay: 4.5)
                     }
                 } else {
                     let authMessage = "Wrong Email or Password"
@@ -200,7 +179,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    func emailRegister() {
+    private func emailRegister() {
         dismissKeyboard()
         if let email = self.registerUsername.text, let pwd = self.registerPassword.text {
             Auth.auth().createUser(withEmail: email, password: pwd, completion: { (auth, error) in
@@ -238,7 +217,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    func completeRegister(user: User, userData: [String : String], userImage: UIImage?) {
+    private func completeRegister(user: User, userData: [String : String], userImage: UIImage?) {
         if let userUID = user.userUID {
             DataService.instance.createFirbaseDBUser(uid: userUID, userData: userData)
             KeychainWrapper.standard.set(userUID, forKey: KEY_UID)
@@ -251,7 +230,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    func getUserImage(from user: User) {
+    private func getUserImage(from user: User) {
         DataService.instance.REF_USER_CURRENT.child("imageURL").observe(.value, with: { (snapshot) in
             if let imageURL = snapshot.value as? String {
                 self.loginImage.loadImageUsingCacheWith(urlString: imageURL, completion: {
@@ -269,12 +248,12 @@ class HomeViewController: UIViewController {
 // MARK: - Animations & Messages
 // -----------------------------
 extension HomeViewController {
-    func batAlertMessage() {
+    func batAlertMessage(delay: TimeInterval = 3.0) {
         if batMessageShowing {
-            exitBatMessage(delay: 3.0)
+            exitBatMessage(delay: delay)
         } else {
             enterBatMessage(completion: {
-                self.exitBatMessage(delay: 2.5)
+                self.exitBatMessage(delay: delay)
             })
         }
     }

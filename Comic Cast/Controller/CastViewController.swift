@@ -21,28 +21,14 @@ class CastViewController: UIViewController {
     
     // MARK: - Properties: Array & Varables
     // -------------------------------------
-    public var comicz = [Comic]()
     public var comics = [Comic]()
-    
     public var comicSelected = [Comic]()
     
-    private var confirmationShowing = true
-    
-    private var comicView: AddComic?
     private var animator: UIViewPropertyAnimator?
-    
+    private var comicView: AddComic?
+
+    private var confirmationShowing = true
     private var lastSelectedCell: UICollectionViewCell?
-    
-    private func testSetup() {
-        // Dilbert
-        let comic0 = Comic(comicID: 0, comicName: "Dilbert", comicNumber: 1, comicTitle: "Business Insider", comicInfo: "That's Not How It Works.", imgURL: "https://static.businessinsider.com/image/525e97dfeab8ead530928bff/image.jpg", logoURL: "https://images-na.ssl-images-amazon.com/images/I/41lCbd6yFlL.jpg")
-        
-        // Calvin and Hobbes
-        let comic1 = Comic(comicID: 2, comicName: "Calvin and Hobbes", comicNumber: 1, comicTitle: "Born to be wild", comicInfo: "He'd be just as funny without all the Pooh jokes", imgURL: "https://www.blingyourband.com/media/catalog/product/cache/1/image/650x650/9df78eab33525d08d6e5fb8d27136e95/i/m/image_calvin-hobbes-baby-helmet-design_2.jpg", logoURL: "https://gartic.com.br/imgs/mural/iv/ivan_ferraro/calvin-e-haroldo.png")
-        comic1.fav = true
-        
-        self.comicz.append(contentsOf: [comic0, comic1])
-    }
     
     // Observe Child Added
     // -------------------
@@ -59,7 +45,7 @@ class CastViewController: UIViewController {
                 guard let userUID = snapValue["userUID"] as? String else { return }
                 guard let userName = snapValue["userName"] as? String else { return }
                 
-                let comic = Comic(comicUID: comicUID, comicNumber: nil, comicTitle: comicTitle, comicInfo: comicInfo, comicDate: comicDate, imgURL: comicURL, logoURL: userURL, userUID: userUID, userName: userName)
+                let comic = Comic(comicUID: comicUID, comicNumber: nil, comicTitle: comicTitle, comicInfo: comicInfo, comicDate: comicDate, comicURL: comicURL, userURL: userURL, userUID: userUID, userName: userName)
                 
                 self.comics.append(comic)
                 self.collectionView.reloadData()
@@ -75,7 +61,6 @@ class CastViewController: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        
         collectionView.contentInset.top = 50
         
         observeChildAdded()

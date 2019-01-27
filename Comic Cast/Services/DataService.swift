@@ -122,7 +122,7 @@ class DataService {
                                         if let absoluteUrlString = url?.absoluteString {
                                             if DataService.instance.REF_COMICS.child(comicUID).childByAutoId().key != nil {
                                                 if let comic = comic {
-                                                    let newComic = Comic(comicUID: comicUID, comicNumber: comic.comicNumber, comicTitle: comic.comicTitle, comicInfo: comic.comicInfo, imgURL: absoluteUrlString, logoURL: comic.userURL, userUID: userUID, userName: user.userName)
+                                                    let newComic = Comic(comicUID: comicUID, comicNumber: comic.comicNumber, comicTitle: comic.comicTitle, comicInfo: comic.comicInfo, comicDate: nil, comicURL: absoluteUrlString, userURL: comic.userURL, userUID: userUID, userName: user.userName)
                                                     DataService.instance.post(comic: newComic)
                                                 }
                                                 completion?()
@@ -171,7 +171,7 @@ class DataService {
                                             DataService.instance.post(comic: comic)
                                         } else {
                                             if let comicUID = DataService.instance.REF_COMICS.childByAutoId().key {
-                                                let newComic = Comic(comicUID: comicUID, comicNumber: 0, comicTitle: "comicTitle", comicInfo: "comicInfo", comicDate: comic?.comicDate, imgURL: absoluteUrlString, logoURL: user.imageURL, userUID: user.userUID, userName: user.userName)
+                                                let newComic = Comic(comicUID: comicUID, comicNumber: 0, comicTitle: "comicTitle", comicInfo: "comicInfo", comicDate: comic?.comicDate, comicURL: absoluteUrlString, userURL: user.imageURL, userUID: user.userUID, userName: user.userName)
                                                 DataService.instance.post(comic: newComic)
                                             }
                                         }
@@ -234,6 +234,7 @@ class DataService {
             }
         }
     }
+    
     
     
 }

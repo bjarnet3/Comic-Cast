@@ -63,7 +63,7 @@ class AddComic: UIView {
  
                     */
                     let dateString = dateToString()
-                    let comic = Comic(comicUID: comicUID, comicNumber: user.comics?.count ?? 0, comicTitle: comicTitleTextField.text ?? "", comicInfo: comicAltTextField.text ?? "", comicDate: dateString, imgURL: "", logoURL: user.imageURL, userUID: user.userUID, userName: user.userName)
+                    let comic = Comic(comicUID: comicUID, comicNumber: user.comics?.count ?? 0, comicTitle: comicTitleTextField.text ?? "", comicInfo: comicAltTextField.text ?? "", comicDate: dateString, comicURL: "", userURL: user.imageURL, userUID: user.userUID, userName: user.userName)
                     
                     DataService.instance.new(comic: comic, with: image, completion: {
                         self.setProgress(progress: 0.0, animated: true, alpha: 0.0, delay: 0.0, duration: 5.2, completion: {

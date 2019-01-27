@@ -28,6 +28,7 @@ class Comic {
     
     var fav: Bool = false
     
+    @available(iOS, deprecated, message: "Only for the static objects")
     init(comicID: Int, comicName: String?, comicNumber: Int?, comicTitle: String?, comicInfo: String?, imgURL: String?, logoURL: String?) {
         self.comicID = comicID
         self.comicName = comicName
@@ -38,28 +39,16 @@ class Comic {
         self.userURL = logoURL
     }
     
-    init(comicUID: String?, comicNumber: Int?, comicTitle: String?, comicInfo: String?, imgURL: String?, logoURL: String?, userUID: String?, userName: String?) {
+    init(comicUID: String?, comicNumber: Int?, comicTitle: String?, comicInfo: String?, comicDate: String?, comicURL: String?, userURL: String?, userUID: String?, userName: String?) {
         self.comicUID = comicUID
         self.comicNumber = comicNumber
         self.comicTitle = comicTitle
         self.comicInfo = comicInfo
-        self.comicURL = imgURL
-        self.userURL = logoURL
+        self.comicDate = comicDate ?? dateToString()
+        self.comicURL = comicURL
+        self.userURL = userURL
         self.userUID = userUID
         self.userName = userName
     }
-    
-    init(comicUID: String?, comicNumber: Int?, comicTitle: String?, comicInfo: String?, comicDate: String?, imgURL: String?, logoURL: String?, userUID: String?, userName: String?) {
-        self.comicUID = comicUID
-        self.comicNumber = comicNumber
-        self.comicTitle = comicTitle
-        self.comicInfo = comicInfo
-        self.comicURL = imgURL
-        self.comicDate = comicDate
-        self.userURL = logoURL
-        self.userUID = userUID
-        self.userName = userName
-    }
-    
     
 }

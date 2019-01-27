@@ -41,7 +41,7 @@ class LibraryViewController: UIViewController {
     @IBAction func shareAction(_ sender: Any) {
         exitOptions()
         if let lastCell = lastSelectedCell as? ComicCollectionCell {
-            /*
+            /* linkURL
             if let linkURL = lastCell.comic?.comicURL {
                 UIPasteboard.general.string = linkURL
             }
@@ -55,8 +55,6 @@ class LibraryViewController: UIViewController {
     @IBAction func exitOptionsAction(_ sender: Any) {
         exitOptions()
     }
-    
-    
     
     // MARK: - Properties: Array & Varables
     // -------------------------------------

@@ -1,7 +1,7 @@
 # ![Comic Cast](/Comic%20Cast/Library/Assets.xcassets/Icons/icon_small.imageset/icon_small.png) Comic Cast
 [![Comic Cast Version](https://img.shields.io/badge/Version-1.00%20Beta-ff69b4.svg)](README.md)
 [![iOS 12.1](https://img.shields.io/badge/Platform-iOS%2012.1-lightgrey.svg)](https://developer.apple.com/ios/)
-[![Swift 4.1](https://img.shields.io/badge/Swift-4.1-orange.svg?style=flat)](https://swift.org)
+[![Swift 4.2](https://img.shields.io/badge/Swift-4.2-orange.svg?style=flat)](https://swift.org)
 [![Firebase Database](https://img.shields.io/badge/Database-Firebase-yellow.svg)](https://firebase.google.com/)
 [![Project Progress](https://img.shields.io/badge/Progress-20%25-red.svg)](README.md)
 [![MIT licensed](https://img.shields.io/badge/License-MIT-blue.svg)](README.md)

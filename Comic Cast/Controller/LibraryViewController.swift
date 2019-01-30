@@ -40,16 +40,8 @@ class LibraryViewController: UIViewController {
     
     @IBAction func shareAction(_ sender: Any) {
         exitOptions()
-        if let lastCell = lastSelectedCell as? ComicCollectionCell {
-            /* linkURL
-            if let linkURL = lastCell.comic?.comicURL {
-                UIPasteboard.general.string = linkURL
-            }
-            */
-            if let image = lastCell.comicImageView.image {
-                UIPasteboard.general.image = image
-            }
-        }
+        clipboardAlert()
+        
     }
     
     @IBAction func exitOptionsAction(_ sender: Any) {
@@ -390,3 +382,81 @@ extension LibraryViewController: UIScrollViewDelegate {
 
 }
 
+// MARK: - UIAlertController (Alert Actions)
+// ----------------------------------------
+extension LibraryViewController {
+    
+    func enterBlur() {
+        // Instantiate Visual Blur View
+        let visualView = UIVisualEffectView(frame: UIScreen.main.bounds)
+        self.view.addSubview(visualView)
+        // Set properties
+        visualView.effect = nil
+        // Instantiate UIPropertyAnimator
+        animator = UIViewPropertyAnimator(duration: 0.38, curve: .easeOut) {
+            visualView.effect = UIBlurEffect(style: .light)
+        }
+        // Add Visual and RequestView to subview
+        self.view.addSubview(visualView)
+        // Start Animator Animation (visualView)
+        animator?.startAnimation()
+        visualView.isUserInteractionEnabled = true
+    }
+    
+    func exitBlur() {
+        var visualView: UIVisualEffectView?
+        
+        for view in self.view.subviews {
+            if view is UIVisualEffectView {
+                print("VisualEffectView is found")
+                visualView = (view as? UIVisualEffectView)!
+            }
+            
+            if let visualView = visualView {
+                self.animator = UIViewPropertyAnimator(duration: 0.38, curve: .easeOut) {
+                    visualView.effect = nil
+                }
+                self.animator?.startAnimation()
+                visualView.isUserInteractionEnabled = false
+            }
+        }
+    }
+    
+    func clipboardAlert() {
+        enterBlur()
+        if let lastCell = lastSelectedCell as? ComicCollectionCell {
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            
+            let linkAction = UIAlertAction(title: "Copy Link", style: .default) { (_) in
+                
+                if let linkURL = lastCell.comic?.comicURL {
+                    UIPasteboard.general.string = linkURL
+                }
+                self.exitBlur()
+            }
+            
+            let imageAction = UIAlertAction(title: "Copy Image", style: .default) { (_) in
+                
+                if let image = lastCell.comicImageView.image {
+                    UIPasteboard.general.image = image
+                }
+                self.exitBlur()
+            }
+            
+            let cancelAction = UIAlertAction(title: "Avbryt", style: .cancel) { (_) in
+                self.exitBlur()
+            }
+            
+            alertController.addAction(linkAction)
+            alertController.addAction(imageAction)
+            alertController.addAction(cancelAction)
+            
+            self.present(alertController, animated: true, completion: {
+                
+            })
+        }
+        
+    }
+    
+    
+}

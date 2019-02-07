@@ -1,6 +1,0 @@
-framework module Pods_Comic_Cast {
-  umbrella header "Pods-Comic Cast-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -500,6 +500,7 @@
 			baseConfigurationReference = CC6D81D45BF39DF338B0DF30 /* Pods-Comic Cast.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GCRJ652248;
 				INFOPLIST_FILE = "Comic Cast/Info.plist";
@@ -509,6 +510,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "no.digitalmood.Comic-Cast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -519,6 +521,7 @@
 			baseConfigurationReference = 20EE01CE34A5E07E107F2616 /* Pods-Comic Cast.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GCRJ652248;
 				INFOPLIST_FILE = "Comic Cast/Info.plist";
@@ -528,6 +531,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "no.digitalmood.Comic-Cast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

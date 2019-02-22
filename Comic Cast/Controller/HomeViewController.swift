@@ -61,12 +61,12 @@ class HomeViewController: UIViewController {
     
     private func setupScrollView() {
         if let image = UIImage(named: "U0Y2pqS") {
-            // let patternImage = UIColor(patternImage: image)
-            let imageView = UIImageView(image: image)
-            imageView.contentMode = .scaleAspectFill
+            let patternImage = UIColor(patternImage: image)
+            // let imageView = UIImageView(image: image)
+            // imageView.contentMode = .scaleAspectFill
             // imageView.contentScaleFactor = 1.0
-            // self.backgroundScrollView.backgroundColor = patternImage
-            self.backgroundScrollView.addSubview(imageView)
+            self.backgroundScrollView.backgroundColor = patternImage
+            // self.backgroundScrollView.addSubview(imageView)
         }
     }
     

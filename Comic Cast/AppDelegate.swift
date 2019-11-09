@@ -18,6 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        guard let file = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist") else { return false }
+        guard let dict = NSDictionary(contentsOfFile: file) else { return false }
+        guard let apiKey = dict["API_KEY"] as? String else { return false }
+        
+        print(apiKey)
+        
         // Configure Firebase
         FirebaseApp.configure()
         return true

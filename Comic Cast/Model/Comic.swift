@@ -28,7 +28,7 @@ class Comic {
     
     var fav: Bool = false
     
-    @available(iOS, deprecated, message: "Only for the static objects")
+    // @available(iOS, deprecated, message: "Only for the static objects")
     init(comicID: Int, comicName: String?, comicNumber: Int?, comicTitle: String?, comicInfo: String?, imgURL: String?, logoURL: String?) {
         self.comicID = comicID
         self.comicName = comicName
